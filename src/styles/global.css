@@ -1,0 +1,71 @@
+:root {
+  /* Theme and common color */
+  --theme-color: #bd269b;
+  --white-color: #fff;
+  --black-color: #000;
+
+  /* Font's color */
+  --grey-text-color: #666;
+  --red-text-color: #f02849;
+
+  /* Background's color */
+  --white-smoke-bg-color: #fbfbfb;
+  --gray-bg-color-lighter: #f0f0f0;
+  --gray-bg-color: #d3d3d3;
+  --dark-gray-bg-color: #3a3a3a;
+  --navy-blue-bg-color: #2f4050;
+  --navy-blue-bg-color-darker: #1C2630;
+
+  /* Border's color */
+  --grey-border-color: #d3d3d3;
+  --navy-blue-border-color-darker: #1C2630;
+
+  /* Transparent color */
+  --black-shadow-color-light: rgba(0, 0, 0, 0.25);
+  --black-shadow-color-heavy: rgba(0, 0, 0, 0.8);
+}
+
+
+body {
+  overflow-x: hidden;
+}
+
+button, input, textarea {
+  font-family: "HelveticaNeue";
+  font-size: 16px;
+  color: var(--black-color);
+}
+
+.with_sidebar_open {
+  margin-left: 80px;
+}
+
+.navbar {
+  min-height: 80px;
+}
+  
+/* Style for Custom Classes */
+.login_page, .signup_page {
+  width: 100%;
+  height: 100%;
+  min-width: 600px;
+}
+
+.default_btn {
+  padding: 12px 24px;
+  border-radius: 8px;
+  background-color: var(--theme-color);
+  color: var(--white-color);
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+.default_btn:hover {
+  box-shadow: 0 0 10px 0 var(--theme-color);
+}
+
+.link_text {
+  color: inherit;
+  text-decoration: inherit;
+}
