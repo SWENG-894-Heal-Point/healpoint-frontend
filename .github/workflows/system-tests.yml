@@ -64,6 +64,7 @@ jobs:
           echo "Backend did not start in time"
           cat backend/backend.log || echo "No backend.log found"
           exit 1
+          
       # 6. Install frontend deps + build
       - name: Install frontend deps
         run: npm ci
@@ -71,21 +72,28 @@ jobs:
       - name: Build frontend
         run: |
           VITE_API_BASE=http://localhost:8080 npm run build
+          
       # 7. Start frontend (vite preview)
       - name: Start frontend
         run: |
-          npm run preview -- --port 4173 &
+          npm run preview -- --host 0.0.0.0 --port 4173 > frontend.log 2>&1 &
           echo $! > frontend.pid
+      
       - name: Wait for frontend readiness
         run: |
+          sleep 10
+          cat frontend.log 
           for i in {1..20}; do
             if curl -s http://localhost:4173 | grep -q "<!DOCTYPE html>"; then
               echo "Frontend is UP"
               exit 0
             fi
-            sleep 2
+            sleep 3
           done
-          echo "Frontend did not start in time" && exit 1
+          echo "Frontend did not start in time"
+          cat frontend.log || echo "No frontend.log found"
+          exit 1
+
       # 8. Install Playwright
       - name: Install Playwright
         run: npx playwright install --with-deps
