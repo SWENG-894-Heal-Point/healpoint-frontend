@@ -48,8 +48,12 @@ jobs:
           echo $! > backend.pid
         working-directory: backend
 
-      - name: Verify backend health
-        run: curl -v http://localhost:8080/actuator/health
+      - name: Upload backend log
+        if: always()   # ensure it uploads even if tests fail
+        uses: actions/upload-artifact@v4
+        with:
+          name: backend-log
+          path: backend/backend.log
         
       - name: Wait for backend readiness
         run: |
