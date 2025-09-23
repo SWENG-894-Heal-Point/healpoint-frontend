@@ -82,9 +82,11 @@ jobs:
       - name: Wait for frontend readiness
         run: |
           sleep 10
-          cat frontend.log 
+          cat frontend.log
           for i in {1..20}; do
-            if curl -s http://localhost:4173 | grep -q "<!DOCTYPE html>"; then
+            status=$(curl -s -o /dev/null -w "%{http_code}" http://localhost:4173)
+            echo "curl status: $status"
+            if [ "$status" -eq 200 ]; then
               echo "Frontend is UP"
               exit 0
             fi
