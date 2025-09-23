@@ -38,6 +38,7 @@ const SignupPage = () => {
      * @param values - the values from the personal info form.
      */
     function handleContinue(values) {
+        setErrorMessage("");
         if (values.password !== values.confirmPassword) {
             return;
         }
@@ -54,10 +55,12 @@ const SignupPage = () => {
             })
             .catch((err) => {
                 console.log(err);
+                setErrorMessage(err.response.data);
             });
     }
 
     function handleSubmission(values) {
+        setErrorMessage("");
         const payload = {...userInfo, ...values};
 
         axios.post("/register-user", JSON.stringify(payload), {
@@ -69,19 +72,18 @@ const SignupPage = () => {
                 if (response.status === 200) {
                     alert("Account created successfully! Please log in.");
                     navigate("/login");
-                } else {
-                    setErrorMessage("An error occurred. Please try again.");
                 }
             })
             .catch((err) => {
                 console.log(err);
+                setErrorMessage(err.response.data);
             });
     }
 
     return (
         <div className="signup_page">
             {isContinue ?
-                <PersonalInfoSignup isPatient={isPatient} handleSubmission={handleSubmission}/>
+                <PersonalInfoSignup isPatient={isPatient} handleSubmission={handleSubmission} errorMessage={errorMessage} />
                 :
                 <Formik
                     initialValues={{

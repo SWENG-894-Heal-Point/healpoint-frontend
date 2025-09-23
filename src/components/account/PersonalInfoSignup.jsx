@@ -1,4 +1,4 @@
-import {Formik, Field, ErrorMessage} from "formik";
+import {Formik, Field} from "formik";
 
 import AccountWrapper from "@/components/account/AccountWrapper";
 import style from "@/styles/account.module.css";
@@ -149,16 +149,17 @@ const PersonalInfoSignup = (props) => {
                                         placeholder="Years of Experience"
                                         type="number"
                                         min="0"
-                                        required
                                     />
                                     <Field
                                         name="languages"
                                         placeholder="Languages Spoken"
                                         type="text"
-                                        required
                                     />
                                 </div>)}
                         </div>
+                    </div>
+                    <div className={style.error}>
+                        {props.errorMessage && <p>{props.errorMessage}</p>}
                     </div>
                     <button type="submit">Submit</button>
                 </AccountWrapper>)}
