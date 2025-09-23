@@ -48,6 +48,9 @@ jobs:
           echo $! > backend.pid
         working-directory: backend
 
+      - name: Verify backend health
+        run: curl -v http://localhost:8080/actuator/health
+        
       - name: Wait for backend readiness
         run: |
           cat backend/backend.log
