@@ -51,7 +51,9 @@ jobs:
       - name: Wait for backend readiness
         run: |
           for i in {1..20}; do
-            if curl -s http://localhost:8080/actuator/health | grep -q UP; then
+            result=$(curl -s http://localhost:8080/actuator/health)
+            echo "curl result: $result"
+            if echo "$result" | grep -q UP; then
               echo "Backend is UP"
               exit 0
             fi
