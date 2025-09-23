@@ -23,6 +23,9 @@ jobs:
           ref: qa
           path: backend
           token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
+      
+      - name: List files in backend folder
+        run: ls -l backend
 
       # 3. Setup Java + Node
       - name: Setup JDK 17
