@@ -23,12 +23,6 @@ jobs:
           ref: qa
           path: backend
           token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
-      
-      - name: List files in backend folder
-        run: ls -l backend
-
-      - name: List all files in current directory
-        run: ls -al
 
       # 3. Setup Java + Node
       - name: Setup JDK 17
@@ -50,8 +44,9 @@ jobs:
       # 5. Start backend with test profile (H2 DB)
       - name: Start backend
         run: |
-          java -jar backend/target/*.jar --spring.profiles.active=test &
+          java -jar target/*.jar --spring.profiles.active=test &
           echo $! > backend.pid
+        working-directory: backend
 
       - name: Wait for backend readiness
         run: |
