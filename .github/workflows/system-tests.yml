@@ -59,7 +59,9 @@ jobs:
             fi
             sleep 3
           done
-          echo "Backend did not start in time" && exit 1
+          echo "Backend did not start in time"
+          cat backend/backend.log || echo "No backend.log found"
+          exit 1
 
       # 6. Install frontend deps + build
       - name: Install frontend deps
