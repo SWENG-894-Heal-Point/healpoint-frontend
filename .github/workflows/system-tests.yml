@@ -44,22 +44,9 @@ jobs:
       # 5. Start backend with test profile (H2 DB)
       - name: Start backend
         run: |
-          java -jar target/*.jar --spring.profiles.active=test 2>&1 | tee backend.log &
+          java -jar target/*.jar --spring.profiles.active=test &
           echo $! > backend.pid
         working-directory: backend
-
-      - name: Monitor backend logs
-        run: |
-          sleep 20
-          echo "--- Backend log ---"
-          cat backend/backend.log
-
-      - name: Upload backend log
-        if: always()   # ensure it uploads even if tests fail
-        uses: actions/upload-artifact@v4
-        with:
-          name: backend-log
-          path: backend/backend.log
         
       - name: Wait for backend readiness
         run: |
