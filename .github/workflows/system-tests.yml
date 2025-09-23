@@ -44,7 +44,7 @@ jobs:
       # 5. Start backend with test profile (H2 DB)
       - name: Start backend
         run: |
-          java -jar target/*.jar --spring.profiles.active=test > backend.log 2>&1 &
+          java -jar target/*.jar --spring.profiles.active=test &
           echo $! > backend.pid
         working-directory: backend
 
