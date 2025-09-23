@@ -22,7 +22,7 @@ jobs:
       - name: Checkout backend
         uses: actions/checkout@v4
         with:
-          repository: SWENG-894-Heal-Point/healpoint-backend.git
+          repository: SWENG-894-Heal-Point/healpoint-backend
           ref: qa
           path: backend
           token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
