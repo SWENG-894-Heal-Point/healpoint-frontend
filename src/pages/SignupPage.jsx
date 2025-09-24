@@ -50,7 +50,7 @@ const SignupPage = () => {
                     setUserInfo(values);
                     setContinue(true);
                 } else {
-                    setErrorMessage("An account with this email already exists");
+                    setErrorMessage("An account with this email already exists.");
                 }
             })
             .catch((err) => {
@@ -72,6 +72,9 @@ const SignupPage = () => {
                 if (response.status === 200) {
                     alert("Account created successfully! Please log in.");
                     navigate("/login");
+                } else {
+                    console.log(response);
+                    setErrorMessage(response.data);
                 }
             })
             .catch((err) => {
