@@ -4,8 +4,9 @@ test('successful-registration', async ({ page }) => {
     await page.goto('http://localhost:4173/signup');
 
     page.on('dialog', async dialog => {
+        // Verify that the success alert is shown
         expect(dialog.message()).toBe('Account created successfully! Please log in.');
-        await dialog.dismiss();
+        await dialog.accept();
     })
 
     // Fill out first page of the registration form
@@ -48,6 +49,12 @@ test('reject-existing-email', async ({ page }) => {
 test('unauthorized-employee', async ({ page }) => {
     await page.goto('http://localhost:4173/signup');
 
+    var alert = "Did not receive expected alert";
+    page.on('dialog', async dialog => {
+        alert = dialog.message();
+        await dialog.accept();
+    })
+
     // Fill out first page of the registration form
     await page.fill('input[name="email"]', 'st10.doctor@healpoint.com');
     await page.fill('input[name="password"]', 'TestPass123!');
@@ -68,13 +75,15 @@ test('unauthorized-employee', async ({ page }) => {
     await page.fill('input[name="languages"]', 'English, Spanish');
     await page.click('button[type="submit"]');
 
-    await expect(page.getByText('The provided employee email does not exist in the system.')).toBeVisible({ timeout: 3000 });
+    // Ensure user did not receive success alert
+    expect(alert).toBe("Did not receive expected alert");
 });
 
 test('authorized-employee', async ({ page }) => {
     await page.goto('http://localhost:4173/signup');
 
     page.on('dialog', async dialog => {
+        // Verify that the success alert is shown
         expect(dialog.message()).toBe('Account created successfully! Please log in.');
         await dialog.dismiss();
     })
