@@ -22,24 +22,25 @@ const LoginPage = () => {
         }
     }, []);
 
-    function handleSubmission(values) {
+    async function handleSubmission(values) {
         setErrorMessage("")
 
-        axios.post("/authenticate-user", JSON.stringify(values), {
-            headers: {
-                "Content-Type": "application/json"
-            }
-        })
-            .then((response) => {
-                if (response.status === 200) {
-                    secureLocalStorage.setItem("auth-token", response.data);
-                    navigate("/");
-                }
-            })
-            .catch((err) => {
-                setErrorMessage(err.response.data);
-                console.log(err);
+        try {
+            const response = await axios.post("/authenticate-user", values, {
+                headers: {"Content-Type": "application/json"}
             });
+            if (response.status === 200) {
+                secureLocalStorage.setItem("auth-token", response.data);
+                navigate("/");
+            }
+        } catch (err) {
+            if (err.response && err.response.data) {
+                setErrorMessage(err.response.data);
+            } else {
+                setErrorMessage("An unexpected error occurred. Please try again.");
+            }
+            console.error(err);
+        }
     }
 
     return (
