@@ -3,9 +3,9 @@ name: System Tests
 
 on:
   push:
-    branches: [ main, qa ]
+    branches: [ qa ]
   pull_request:
-    branches: [ main, qa ]
+    branches: [ main ]
   
 jobs:
   e2e-tests:
