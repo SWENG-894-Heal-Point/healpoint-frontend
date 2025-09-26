@@ -15,10 +15,7 @@ const SignupPage = () => {
     const [userInfo, setUserInfo] = useState({});
     const [isPatient, setIsPatient] = useState(true);
 
-    axios.defaults.baseURL = import.meta.env.VITE_API_URL;
     const navigate = useNavigate();
-
-    // const csrftoken = GetCSFR();
 
     /**
      * Checks if the password is valid and has min 8 letter password, at least 1 symbol, upper and
