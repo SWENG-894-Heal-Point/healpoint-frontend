@@ -69,6 +69,10 @@
     gap: 10px;
 }
 
+.login_form .account_container {
+    width: 300px;
+}
+
 .radio_input {
     text-align: left;
     margin: 10px 5px 5px;
