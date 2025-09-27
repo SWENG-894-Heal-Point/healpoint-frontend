@@ -42,12 +42,12 @@
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    background-color: var(--theme-color);
+    background-color: var(--primary-theme-color);
     color: var(--white-color);
 }
 
 .account_container .form button:hover {
-    box-shadow: 0 0 10px 3px var(--theme-color);
+    box-shadow: 0 0 10px 3px var(--primary-theme-color);
 }
 
 .personal_info_container {
@@ -67,6 +67,10 @@
 .signup_right .info_row {
     display: flex;
     gap: 10px;
+}
+
+.login_form {
+    height: 100%;
 }
 
 .login_form .account_container {
@@ -97,6 +101,8 @@
 }
 
 .primary_title {
+    color: var(--primary-theme-color);
+    text-align: center;
     font-size: 32px;
     font-weight: bold;
     position: relative;
@@ -107,10 +113,14 @@
 
 .redirect_link {
     margin-top: 10px;
+    text-align: center;
 }
 
 .redirect_link span {
     color: var(--black-color);
+}
+.redirect_link a {
+    color: var(--primary-theme-color);
 }
 
 .error {
@@ -176,7 +186,7 @@
     width: auto;
     position: relative;
     z-index: 2;
-    top: -37px;
+    top: -34px;
     right: 15px;
     cursor: pointer;
 }
