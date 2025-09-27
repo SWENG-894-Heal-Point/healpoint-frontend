@@ -1,27 +1,26 @@
-import {useEffect, useState} from "react";
-import axios from "axios";
+import {useState} from "react";
 import secureLocalStorage from "react-secure-storage";
+import axios from "axios";
 
-import {getMenuItems} from '@/utils/getMenuItems';
+import {getMenuItems} from "@/utils/getMenuItems.js";
 import Layout from "@/components/common/Layout.jsx";
 import DoctorProfileView from "@/components/account/DoctorProfileView.jsx";
+import SearchBar from "@/components/common/SearchBar.jsx";
 import PatientProfileView from "@/components/account/PatientProfileView.jsx";
 
-import style from '@/styles/profile.module.css';
-
-
-export default function AccountPage() {
+export default function PatientListPage() {
     const [profileData, setprofileData] = useState(null);
-    const [role, setRole] = useState("Patient");
+    const [role] = useState("Doctor");
     const authToken = secureLocalStorage.getItem("auth-token");
 
-    useEffect(() => {
-        axios.post("/get-my-profile", {token: authToken}, {
+    function handleSearch(email) {
+        const emailValue = typeof email === "object" && email.target ? email.target.value : email;
+
+        axios.post("/get-doctor-profile", {token: authToken, email: emailValue}, {
             headers: {"Content-Type": "application/json"}
         })
             .then((response) => {
                 if (response.status === 200) {
-                    setRole(response.data.role);
                     setprofileData(response.data);
                     console.log(response.data);
                 }
@@ -29,20 +28,15 @@ export default function AccountPage() {
             .catch((err) => {
                 console.error(err);
             });
-        // eslint-disable-next-line
-    }, []);
+    }
 
     const menuItems = getMenuItems(role);
 
     return (
         <>
             <Layout menuItems={menuItems}>
-                {role === "Doctor" && profileData && <DoctorProfileView profileData={profileData} />}
-                {role === "Patient" && profileData && <PatientProfileView profileData={profileData} />}
-                {profileData && <div className={style.button_group}>
-                    <button className="default_btn">Edit</button>
-                    <button className="default_btn">Change Password</button>
-                </div>}
+                <SearchBar handleSearch={handleSearch}/>
+                {profileData && <PatientProfileView profileData={profileData}/>}
             </Layout>
         </>
     );

@@ -1,12 +1,13 @@
-import LogoutButton from "@/components/account/LogOutButton.jsx";
+import {getMenuItems} from '@/utils/getMenuItems';
+import Layout from "@/components/common/Layout.jsx";
 
-const DashboardPage = () => {
+export default function DashboardPage() {
+    const menuItems = getMenuItems("patient");
     return (
         <>
-            <h1>Dashboard Page</h1>
-            <LogoutButton/>
+            <Layout menuItems={menuItems}>
+                <h2>Dashboard Page</h2>
+            </Layout>
         </>
     );
 };
-
-export default DashboardPage;
