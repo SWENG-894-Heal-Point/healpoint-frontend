@@ -9,7 +9,6 @@ import LoginPage from './pages/LoginPage';
 import SignupPage from './pages/SignupPage';
 import DashboardPage from './pages/DashboardPage';
 import AccountPage from './pages/AccountPage';
-import DoctorProfileView from "@/components/account/DoctorProfileView.jsx";
 import DoctorDirectoryPage from "@/pages/DoctorDirectoryPage.jsx";
 import PatientListPage from "@/pages/PatientListPage.jsx";
 
@@ -27,7 +26,7 @@ function App() {
                 navigate("/login");
             }
         }
-    }, [navigate, location]);
+    }, [navigate, pathname]);
 
     return (
         <Routes>

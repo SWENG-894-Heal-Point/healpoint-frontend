@@ -11,7 +11,7 @@ import style from '@/styles/profile.module.css';
 
 
 export default function AccountPage() {
-    const [profileData, setprofileData] = useState(null);
+    const [profileData, setProfileData] = useState(null);
     const [role, setRole] = useState("Patient");
     const authToken = secureLocalStorage.getItem("auth-token");
 
@@ -22,7 +22,7 @@ export default function AccountPage() {
             .then((response) => {
                 if (response.status === 200) {
                     setRole(response.data.role);
-                    setprofileData(response.data);
+                    setProfileData(response.data);
                     console.log(response.data);
                 }
             })

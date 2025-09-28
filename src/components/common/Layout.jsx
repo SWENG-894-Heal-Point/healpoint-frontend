@@ -1,6 +1,6 @@
 import {useState} from "react";
 import {Link} from "react-router-dom";
-import {Sidebar, Menu, MenuItem, SubMenu} from 'react-pro-sidebar';
+import {Sidebar, Menu, MenuItem} from 'react-pro-sidebar';
 
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faSquareCaretLeft, faSquareCaretRight} from "@fortawesome/free-solid-svg-icons";

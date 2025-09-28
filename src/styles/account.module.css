@@ -177,7 +177,7 @@
     color: var(--black-color);
 }
 
-#show_password {
+.show_password {
     text-align: right;
     color: var(--grey-text-color);
     background: none;

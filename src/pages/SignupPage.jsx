@@ -25,7 +25,7 @@ const SignupPage = () => {
      * @returns a boolean indicating whether the password is valid.
      */
     function checkPassword(str) {
-        var re = /^(?=.*\d)(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
+        const re = /^(?=.*\d)(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
         return re.test(str);
     }
 
@@ -131,7 +131,7 @@ const SignupPage = () => {
                             }}
                             />
                             <div className={style.radio_input}>
-                                <label className={style.radio_label}>Are you a patient or doctor?</label>
+                                <label>Are you a patient or doctor?</label>
                                 <div className={style.radio_btn}>
                                     {["Patient", "Doctor"].map((e, key) => {
                                         return (

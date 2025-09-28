@@ -18,7 +18,7 @@ export default function SearchBar(props) {
                 onChange={(e) => setSearchValue(e.target.value)}
             />
             <span className={style.search_button}>
-            <button onClick={() => props.handleSearch(searchValue)}><FontAwesomeIcon icon={faMagnifyingGlass}/>
+            <button type="submit" onClick={() => props.handleSearch(searchValue)}><FontAwesomeIcon icon={faMagnifyingGlass}/>
             </button></span>
         </div>
     );
