@@ -1,0 +1,46 @@
+{
+  "doctorMenu": [
+    {
+      "label": "Dashboard",
+      "path": "/"
+    },
+    {
+      "label": "Appointments",
+      "path": "/appointments"
+    },
+    {
+      "label": "Patient List",
+      "path": "/patients"
+    },
+    {
+      "label": "Doctor Directory",
+      "path": "/doctors"
+    },
+    {
+      "label": "Account",
+      "path": "/account"
+    }
+  ],
+  "patientMenu": [
+    {
+      "label": "Dashboard",
+      "path": "/"
+    },
+    {
+      "label": "Appointments",
+      "path": "/appointments"
+    },
+    {
+      "label": "Prescription",
+      "path": "/prescriptions"
+    },
+    {
+      "label": "Doctor Directory",
+      "path": "/doctors"
+    },
+    {
+      "label": "Account",
+      "path": "/account"
+    }
+  ]
+}

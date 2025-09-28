@@ -20,27 +20,28 @@ const LoginPage = () => {
                 navigate("/");
             }
         }
-    }, []);
+    }, [navigate]);
 
-    async function handleSubmission(values) {
+    function handleSubmission(values) {
         setErrorMessage("")
 
-        try {
-            const response = await axios.post("/authenticate-user", values, {
-                headers: {"Content-Type": "application/json"}
+        axios.post("/authenticate-user", values, {
+            headers: {"Content-Type": "application/json"}
+        })
+            .then((response) => {
+                if (response.status === 200) {
+                    secureLocalStorage.setItem("auth-token", response.data);
+                    navigate("/");
+                }
+            })
+            .catch((err) => {
+                if (err.response && err.response.data) {
+                    setErrorMessage(err.response.data);
+                } else {
+                    setErrorMessage("An unexpected error occurred. Please try again.");
+                }
+                console.error(err);
             });
-            if (response.status === 200) {
-                secureLocalStorage.setItem("auth-token", response.data);
-                navigate("/");
-            }
-        } catch (err) {
-            if (err.response && err.response.data) {
-                setErrorMessage(err.response.data);
-            } else {
-                setErrorMessage("An unexpected error occurred. Please try again.");
-            }
-            console.error(err);
-        }
     }
 
     return (
@@ -60,7 +61,7 @@ const LoginPage = () => {
                         <Field id="email" name="email" placeholder="Email" type="email" required/>
                         <Field id="password" name="password" placeholder="Password"
                                type={isShowPassword ? "text" : "password"} required/>
-                        <span id={style.show_password}
+                        <span className={style.show_password}
                               onClick={() => setShowPassword(!isShowPassword)}>{isShowPassword ? "Hide" : "Show"}</span>
                         {errorMessage && <div className={style.error}>{errorMessage}</div>}
                         <button type="submit">Login</button>

@@ -1,0 +1,45 @@
+.user_name h2 {
+    margin-bottom: 0;
+}
+
+.user_name p {
+    margin-top: 4px;
+}
+
+.row {
+    display: flex;
+    flex-direction: row;
+    gap: 30px;
+}
+
+.card {
+    width: 50%;
+    background-color: var(--white-color);
+    padding: 20px;
+    margin-top: 20px;
+    border-radius: 16px;
+}
+
+.card.full_width {
+    width: calc(100% - 40px);
+}
+
+.card p {
+    margin-left: 20px;
+}
+
+.card.full_width span {
+    display: inline-block;
+    min-width: 50%;
+}
+
+.button_group {
+    margin: 40px 0 20px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.button_group button {
+    width: 180px;
+    font-weight: bold;
+}

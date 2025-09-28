@@ -6,14 +6,21 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "lint": "eslint src --ext .js,.jsx,.ts,.tsx",
+    "metrics:plato": "plato -r -d metrics-report ./src",
+    "metrics:cloc": "npx sloc ./src --ext js,jsx,ts,tsx",
+    "metrics": "npm run lint && npm run metrics:plato && npm run metrics:cloc"
   },
   "dependencies": {
+    "@fortawesome/free-regular-svg-icons": "^7.0.1",
+    "@fortawesome/free-solid-svg-icons": "^7.0.1",
+    "@fortawesome/react-fontawesome": "^3.0.2",
     "axios": "^1.12.2",
     "formik": "^2.4.6",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
+    "react-pro-sidebar": "^1.1.0",
     "react-router-dom": "^7.9.1",
     "react-secure-storage": "^1.3.2"
   },
@@ -24,10 +31,13 @@
     "@types/react": "^19.1.10",
     "@types/react-dom": "^19.1.7",
     "@vitejs/plugin-react": "^5.0.0",
-    "eslint": "^9.33.0",
+    "cloc": "^2.6.0-cloc",
+    "eslint": "^9.36.0",
     "eslint-plugin-react-hooks": "^5.2.0",
     "eslint-plugin-react-refresh": "^0.4.20",
     "globals": "^16.3.0",
+    "plato": "^1.7.0",
+    "sloc": "^0.3.2",
     "vite": "^7.1.2"
   }
 }

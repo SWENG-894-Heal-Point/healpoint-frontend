@@ -1,0 +1,21 @@
+{
+  "env": {
+    "browser": true,
+    "es2021": true
+  },
+  "extends": ["eslint:recommended", "plugin:react/recommended"],
+  "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true
+    },
+    "ecmaVersion": "latest",
+    "sourceType": "module"
+  },
+  "plugins": ["react"],
+  "rules": {
+    "complexity": ["warn", 10],               // Warn if CC > 10
+    "max-lines": ["warn", 200],               // Warn if file > 200 LOC
+    "max-lines-per-function": ["warn", 50],   // Warn if function > 50 LOC
+    "max-params": ["warn", 5]                 // Warn if too many function params (cohesion hint)
+  }
+}
