@@ -122,7 +122,7 @@ const SignupPage = () => {
                                        setPasswordsMatch(e.target.value === values.confirmPassword);
                                    }}
                             />
-                            <span id={style.show_password}
+                            <span className={style.show_password}
                                   onClick={() => setShowPassword(!isShowPassword)}>{isShowPassword ? "Hide" : "Show"}</span>
                             <Field id="confirmPassword" name="confirmPassword" placeholder="Confirm Password"
                                    type={isShowPassword ? "text" : "password"} required onChange={(e) => {

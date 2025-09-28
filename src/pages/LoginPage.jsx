@@ -61,7 +61,7 @@ const LoginPage = () => {
                         <Field id="email" name="email" placeholder="Email" type="email" required/>
                         <Field id="password" name="password" placeholder="Password"
                                type={isShowPassword ? "text" : "password"} required/>
-                        <span id={style.show_password}
+                        <span className={style.show_password}
                               onClick={() => setShowPassword(!isShowPassword)}>{isShowPassword ? "Hide" : "Show"}</span>
                         {errorMessage && <div className={style.error}>{errorMessage}</div>}
                         <button type="submit">Login</button>
