@@ -38,7 +38,7 @@ const PersonalInfoSignup = (props) => {
             {({values}) => (<AccountWrapper
                     url="/login"
                     urlText="Log in"
-                    propmtText="Have an account?&nbsp;"
+                    promptText="Have an account?&nbsp;"
                 >
                     <div className={style.personal_info_container}>
                         <div className={style.signup_left}>

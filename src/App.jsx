@@ -3,14 +3,16 @@ import {useEffect} from "react";
 import axios from "axios";
 import secureLocalStorage from "react-secure-storage";
 
-import './styles/global.css';
+import '@/styles/global.css';
 
-import LoginPage from './pages/LoginPage';
-import SignupPage from './pages/SignupPage';
-import DashboardPage from './pages/DashboardPage';
-import AccountPage from './pages/AccountPage';
+import LoginPage from '@/pages/LoginPage';
+import SignupPage from '@/pages/SignupPage';
+import DashboardPage from '@/pages/DashboardPage';
+import AccountPage from '@/pages/AccountPage';
 import DoctorDirectoryPage from "@/pages/DoctorDirectoryPage.jsx";
 import PatientListPage from "@/pages/PatientListPage.jsx";
+import PrescriptionPage from "@/pages/PrescriptionPage.jsx";
+import AppointmentPage from "@/pages/AppointmentPage.jsx";
 
 function App() {
     axios.defaults.baseURL = import.meta.env.VITE_API_URL;
@@ -33,9 +35,11 @@ function App() {
             <Route path="/" element={<DashboardPage/>}/>
             <Route path="/login" element={<LoginPage/>}/>
             <Route path="/signup" element={<SignupPage/>}/>
-            <Route path="/account" element={<AccountPage/>}/>
-            <Route path="/doctors" element={<DoctorDirectoryPage/>}/>
+            <Route path="/appointments" element={<AppointmentPage/>}/>
+            <Route path="/prescriptions" element={<PrescriptionPage/>}/>
             <Route path="/patients" element={<PatientListPage/>}/>
+            <Route path="/doctors" element={<DoctorDirectoryPage/>}/>
+            <Route path="/account" element={<AccountPage/>}/>
         </Routes>
     );
 }

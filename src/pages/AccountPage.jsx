@@ -2,7 +2,6 @@ import {useEffect, useState} from "react";
 import axios from "axios";
 import secureLocalStorage from "react-secure-storage";
 
-import {getMenuItems} from '@/utils/getMenuItems';
 import Layout from "@/components/common/Layout.jsx";
 import DoctorProfileView from "@/components/account/DoctorProfileView.jsx";
 import PatientProfileView from "@/components/account/PatientProfileView.jsx";
@@ -32,11 +31,10 @@ export default function AccountPage() {
         // eslint-disable-next-line
     }, []);
 
-    const menuItems = getMenuItems(role);
 
     return (
         <>
-            <Layout menuItems={menuItems}>
+            <Layout>
                 {role === "Doctor" && profileData && <DoctorProfileView profileData={profileData} />}
                 {role === "Patient" && profileData && <PatientProfileView profileData={profileData} />}
                 {profileData && <div className={style.button_group}>

@@ -2,7 +2,6 @@ import {useState} from "react";
 import secureLocalStorage from "react-secure-storage";
 import axios from "axios";
 
-import {getMenuItems} from "@/utils/getMenuItems.js";
 import Layout from "@/components/common/Layout.jsx";
 import SearchBar from "@/components/common/SearchBar.jsx";
 import PatientProfileView from "@/components/account/PatientProfileView.jsx";
@@ -10,7 +9,6 @@ import PatientProfileView from "@/components/account/PatientProfileView.jsx";
 
 export default function PatientListPage() {
     const [profileData, setProfileData] = useState(null);
-    const [role] = useState("Doctor");
     const [message, setMessage] = useState("");
     const authToken = secureLocalStorage.getItem("auth-token");
 
@@ -35,11 +33,9 @@ export default function PatientListPage() {
             });
     }
 
-    const menuItems = getMenuItems(role);
-
     return (
         <>
-            <Layout menuItems={menuItems}>
+            <Layout>
                 <SearchBar handleSearch={handleSearch}/>
                 {profileData && <PatientProfileView profileData={profileData}/>}
                 {!profileData && message && <p>{message}</p>}
