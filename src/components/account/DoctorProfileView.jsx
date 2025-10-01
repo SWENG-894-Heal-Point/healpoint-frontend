@@ -25,7 +25,7 @@ export default function DoctorProfileView({profileData}) {
 
             <div className={`${style.card} ${style.full_width}`}>
                 <h3>More About Dr. {profileData.lastName}</h3>
-                <p><span>Experience: {profileData.yearsOfExperience} years</span>
+                <p><span>Experience: {profileData.experience !== '' && `${profileData.experience} years`}</span>
                     <span>NPI number: {profileData.npiNumber}</span></p>
                 <p>Languages spoken: {profileData.languages}</p>
             </div>

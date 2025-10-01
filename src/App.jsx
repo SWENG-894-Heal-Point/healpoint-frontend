@@ -9,6 +9,7 @@ import LoginPage from '@/pages/LoginPage';
 import SignupPage from '@/pages/SignupPage';
 import DashboardPage from '@/pages/DashboardPage';
 import AccountPage from '@/pages/AccountPage';
+import UpdateAccountPage from '@/pages/UpdateAccountPage.jsx';
 import DoctorDirectoryPage from "@/pages/DoctorDirectoryPage.jsx";
 import PatientListPage from "@/pages/PatientListPage.jsx";
 import PrescriptionPage from "@/pages/PrescriptionPage.jsx";
@@ -40,6 +41,7 @@ function App() {
             <Route path="/patients" element={<PatientListPage/>}/>
             <Route path="/doctors" element={<DoctorDirectoryPage/>}/>
             <Route path="/account" element={<AccountPage/>}/>
+            <Route path="/update-account" element={<UpdateAccountPage/>}/>
         </Routes>
     );
 }

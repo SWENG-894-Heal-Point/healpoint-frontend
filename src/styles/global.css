@@ -30,7 +30,7 @@ body {
     overflow-x: hidden;
 }
 
-button, input, textarea {
+button, input, textarea, select {
     font-family: "HelveticaNeue", Arial, sans-serif;
     font-size: 16px;
     color: var(--black-color);
@@ -70,4 +70,12 @@ button, input, textarea {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+}
+
+.default_dropdown_field select {
+    width: calc(100% - 10px);
+}
+
+.text-align-center {
+    text-align: center;
 }

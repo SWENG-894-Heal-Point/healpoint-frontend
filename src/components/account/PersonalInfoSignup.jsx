@@ -3,7 +3,9 @@ import {Formik, Field} from "formik";
 import AccountWrapper from "@/components/account/AccountWrapper";
 import style from "@/styles/account.module.css";
 
-import states from "../../../data/states.json"
+import states from "@/data/states.json"
+import Dropdown from "@/components/common/Dropdown.jsx";
+import genderOptions from "@/data/genderOptions.json";
 
 const PersonalInfoSignup = (props) => {
     const currentDate = new Date().toISOString().slice(0, 10);
@@ -41,7 +43,7 @@ const PersonalInfoSignup = (props) => {
                     promptText="Have an account?&nbsp;"
                 >
                     <div className={style.personal_info_container}>
-                        <div className={style.signup_left}>
+                        <div className={style.left_column}>
                             <Field name="firstName" placeholder="First Name" required/>
                             <Field name="lastName" placeholder="Last Name" required/>
                             <Field
@@ -53,24 +55,7 @@ const PersonalInfoSignup = (props) => {
                                 max={currentDate}
                                 required
                             />
-                            <div className={style.gender_field}>
-                                <Field
-                                    className={values.gender === "" ? style.gender_unselected : ""}
-                                    name="gender"
-                                    placeholder="Gender"
-                                    as="select"
-                                    required
-                                >
-                                    <option value="" disabled defaultChecked hidden>
-                                        Gender
-                                    </option>
-                                    <option value="male">Male</option>
-                                    <option value="female">Female</option>
-                                    <option value="other">Other</option>
-                                    <option value="unknown">Prefer not to say</option>
-                                </Field>
-                                <span className={style.select_arrow}>▼</span>
-                            </div>
+                            <Dropdown label="Gender" options={genderOptions} required/>
                             <Field
                                 name="phone"
                                 placeholder="Phone No (e.g. 2155551234)"
@@ -80,7 +65,7 @@ const PersonalInfoSignup = (props) => {
                                 required
                             />
                         </div>
-                        <div className={style.signup_right}>
+                        <div className={style.right_column}>
                             {props.isPatient ? (<div>
                                     <Field
                                         name="streetAddress"
@@ -90,23 +75,7 @@ const PersonalInfoSignup = (props) => {
                                     />
                                     <Field name="city" placeholder="City" type="text" required/>
                                     <div className={style.info_row}>
-                                        <div className={style.state_field}>
-                                            <Field
-                                                className={values.state === "" ? style.state_unselected : ""}
-                                                name="state"
-                                                placeholder="State"
-                                                as="select"
-                                                required
-                                            >
-                                                <option key="state" value="" disabled defaultChecked hidden>
-                                                    State
-                                                </option>
-                                                {states.map((s) => (<option key={s.code} value={s.code}>
-                                                        {s.code}
-                                                    </option>))}
-                                            </Field>
-                                            <span className={style.select_arrow}>▼</span>
-                                        </div>
+                                        <Dropdown className={style.state_field} label="State" required options={states}/>
                                         <Field
                                             name="zipCode"
                                             placeholder="ZIP Code"
