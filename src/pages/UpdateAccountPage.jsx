@@ -6,7 +6,7 @@ import axios from "axios";
 
 import Layout from "@/components/common/Layout.jsx";
 import Dropdown from "@/components/common/Dropdown.jsx";
-import {fetchProfileData} from "@/utils/fetchprofileData.js";
+import {fetchProfileData} from "@/utils/fetchProfileData.js";
 import genderOptions from "@/data/genderOptions.json";
 import states from "@/data/states.json";
 
