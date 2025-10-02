@@ -57,7 +57,7 @@ const LoginPage = () => {
                 handleSubmission(values);
             }}>
                 <div className={style.login_form}>
-                    <AccountWrapper url="/signup" urlText="Create New Account" propmtText="">
+                    <AccountWrapper url="/signup" urlText="Create New Account" promptText="">
                         <Field id="email" name="email" placeholder="Email" type="email" required/>
                         <Field id="password" name="password" placeholder="Password"
                                type={isShowPassword ? "text" : "password"} required/>

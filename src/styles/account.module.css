@@ -23,6 +23,8 @@
     flex-direction: column;
 }
 
+.update_profile_container input,
+.update_profile_container select,
 .account_container .form input,
 .account_container .form select {
     padding: 10px;
@@ -50,21 +52,31 @@
     box-shadow: 0 0 10px 3px var(--primary-theme-color);
 }
 
+.account_container.change_password_modal .button_group {
+    margin: 0px;
+}
+
+.update_profile_container {
+    padding-top: 10px;
+    padding-bottom: 20px;
+}
+
+.update_profile_container,
 .personal_info_container {
     display: flex;
     flex-direction: row;
     gap: 20px;
 }
 
-.signup_left input, .signup_right input {
+.left_column input, .right_column input {
     width: calc(100% - 32px);
 }
 
-.signup_left, .signup_right {
+.left_column, .right_column {
     width: 50%;
 }
 
-.signup_right .info_row {
+.right_column .info_row {
     display: flex;
     gap: 10px;
 }
@@ -125,6 +137,7 @@
 
 .error {
     color: var(--red-text-color);
+    text-align: center;
 }
 
 .error > * {
@@ -149,7 +162,6 @@
     width: 170px;
 }
 
-.state_field select,
 .gender_field select {
     width: calc(100% - 10px);
     appearance: none;
@@ -172,7 +184,6 @@
     pointer-events: none;
 }
 
-.state_field select:focus+.select_arrow,
 .gender_field select:focus+.select_arrow  {
     color: var(--black-color);
 }
@@ -189,4 +200,15 @@
     top: -34px;
     right: 15px;
     cursor: pointer;
+}
+
+.button_group {
+    margin: 40px 0 20px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.button_group button {
+    width: 200px;
+    font-weight: bold;
 }

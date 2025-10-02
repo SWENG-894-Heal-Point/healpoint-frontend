@@ -19,7 +19,7 @@ const AccountWrapper = (props) => {
         <Form className={style.form}>{props.children}</Form>
 
         <div className={style.redirect_link}>
-          <span>{props.propmtText}</span>
+          <span>{props.promptText}</span>
           <Link to={props.url} className="link_text">
             {props.urlText}
           </Link>

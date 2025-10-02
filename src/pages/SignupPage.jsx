@@ -113,7 +113,7 @@ const SignupPage = () => {
                         handleContinue(values);
                     }}>
                     {({values, handleChange}) => (
-                        <AccountWrapper url="/login" urlText="Log in" propmtText="Have an account?&nbsp;">
+                        <AccountWrapper url="/login" urlText="Log in" promptText="Have an account?&nbsp;">
                             <Field id="email" name="email" placeholder="Email" type="email" required/>
                             <Field id="password" name="password" placeholder="Password"
                                    type={isShowPassword ? "text" : "password"} required

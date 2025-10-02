@@ -32,3 +32,4 @@ dist-ssr
 
 # Other
 /metrics-report/
+/eslint-report.html
