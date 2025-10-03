@@ -23,6 +23,8 @@
     flex-direction: column;
 }
 
+.update_profile_container input,
+.update_profile_container select,
 .account_container .form input,
 .account_container .form select {
     padding: 10px;
@@ -42,31 +44,45 @@
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    background-color: var(--theme-color);
+    background-color: var(--primary-theme-color);
     color: var(--white-color);
 }
 
 .account_container .form button:hover {
-    box-shadow: 0 0 10px 3px var(--theme-color);
+    box-shadow: 0 0 10px 3px var(--primary-theme-color);
 }
 
+.account_container.change_password_modal .button_group {
+    margin: 0px;
+}
+
+.update_profile_container {
+    padding-top: 10px;
+    padding-bottom: 20px;
+}
+
+.update_profile_container,
 .personal_info_container {
     display: flex;
     flex-direction: row;
     gap: 20px;
 }
 
-.signup_left input, .signup_right input {
+.left_column input, .right_column input {
     width: calc(100% - 32px);
 }
 
-.signup_left, .signup_right {
+.left_column, .right_column {
     width: 50%;
 }
 
-.signup_right .info_row {
+.right_column .info_row {
     display: flex;
     gap: 10px;
+}
+
+.login_form {
+    height: 100%;
 }
 
 .login_form .account_container {
@@ -97,6 +113,8 @@
 }
 
 .primary_title {
+    color: var(--primary-theme-color);
+    text-align: center;
     font-size: 32px;
     font-weight: bold;
     position: relative;
@@ -107,14 +125,19 @@
 
 .redirect_link {
     margin-top: 10px;
+    text-align: center;
 }
 
 .redirect_link span {
     color: var(--black-color);
 }
+.redirect_link a {
+    color: var(--primary-theme-color);
+}
 
 .error {
     color: var(--red-text-color);
+    text-align: center;
 }
 
 .error > * {
@@ -139,7 +162,6 @@
     width: 170px;
 }
 
-.state_field select,
 .gender_field select {
     width: calc(100% - 10px);
     appearance: none;
@@ -162,12 +184,11 @@
     pointer-events: none;
 }
 
-.state_field select:focus+.select_arrow,
 .gender_field select:focus+.select_arrow  {
     color: var(--black-color);
 }
 
-#show_password {
+.show_password {
     text-align: right;
     color: var(--grey-text-color);
     background: none;
@@ -176,7 +197,18 @@
     width: auto;
     position: relative;
     z-index: 2;
-    top: -37px;
+    top: -34px;
     right: 15px;
     cursor: pointer;
+}
+
+.button_group {
+    margin: 40px 0 20px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.button_group button {
+    width: 200px;
+    font-weight: bold;
 }

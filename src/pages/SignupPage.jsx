@@ -25,7 +25,7 @@ const SignupPage = () => {
      * @returns a boolean indicating whether the password is valid.
      */
     function checkPassword(str) {
-        var re = /^(?=.*\d)(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
+        const re = /^(?=.*\d)(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
         return re.test(str);
     }
 
@@ -113,7 +113,7 @@ const SignupPage = () => {
                         handleContinue(values);
                     }}>
                     {({values, handleChange}) => (
-                        <AccountWrapper url="/login" urlText="Log in" propmtText="Have an account?&nbsp;">
+                        <AccountWrapper url="/login" urlText="Log in" promptText="Have an account?&nbsp;">
                             <Field id="email" name="email" placeholder="Email" type="email" required/>
                             <Field id="password" name="password" placeholder="Password"
                                    type={isShowPassword ? "text" : "password"} required
@@ -122,7 +122,7 @@ const SignupPage = () => {
                                        setPasswordsMatch(e.target.value === values.confirmPassword);
                                    }}
                             />
-                            <span id={style.show_password}
+                            <span className={style.show_password}
                                   onClick={() => setShowPassword(!isShowPassword)}>{isShowPassword ? "Hide" : "Show"}</span>
                             <Field id="confirmPassword" name="confirmPassword" placeholder="Confirm Password"
                                    type={isShowPassword ? "text" : "password"} required onChange={(e) => {
@@ -131,7 +131,7 @@ const SignupPage = () => {
                             }}
                             />
                             <div className={style.radio_input}>
-                                <label className={style.radio_label}>Are you a patient or doctor?</label>
+                                <label>Are you a patient or doctor?</label>
                                 <div className={style.radio_btn}>
                                     {["Patient", "Doctor"].map((e, key) => {
                                         return (

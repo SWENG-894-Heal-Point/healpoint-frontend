@@ -2,7 +2,7 @@ import {useNavigate} from "react-router-dom";
 import secureLocalStorage from "react-secure-storage";
 import axios from "axios";
 
-const LogoutButton = () => {
+export default function LogoutButton() {
     const navigate = useNavigate();
 
     async function handleLogout() {
@@ -21,10 +21,8 @@ const LogoutButton = () => {
     }
 
     return (
-        <button className="default_btn" onClick={handleLogout}>
+        <button onClick={handleLogout}>
             Log Out
         </button>
     );
 };
-
-export default LogoutButton;
