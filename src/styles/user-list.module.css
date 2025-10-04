@@ -1,0 +1,10 @@
+.user_table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.user_table .link {
+    text-align: center;
+    cursor: pointer;
+    color: var(--primary-theme-color);
+}

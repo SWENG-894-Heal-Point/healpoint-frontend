@@ -1,15 +1,18 @@
 import {useState} from "react";
-import {faMagnifyingGlass} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faMagnifyingGlass} from "@fortawesome/free-solid-svg-icons";
+import style from "@/styles/searchbar.module.css";
 
-import style from '@/styles/searchbar.module.css';
-
-
-export default function SearchBar(props) {
+export default function SearchBar({handleSearch}) {
     const [searchValue, setSearchValue] = useState("");
 
+    function onSubmit(e) {
+        e.preventDefault(); // prevent page reload
+        handleSearch(searchValue);
+    }
+
     return (
-        <div className={style.search_container}>
+        <form onSubmit={onSubmit} className={style.search_container}>
             <input
                 type="text"
                 className={style.search_input}
@@ -17,9 +20,9 @@ export default function SearchBar(props) {
                 value={searchValue}
                 onChange={(e) => setSearchValue(e.target.value)}
             />
-            <span className={style.search_button}>
-            <button type="submit" onClick={() => props.handleSearch(searchValue)}><FontAwesomeIcon icon={faMagnifyingGlass}/>
-            </button></span>
-        </div>
+            <button type="submit" className={style.search_button}>
+                <FontAwesomeIcon icon={faMagnifyingGlass}/>
+            </button>
+        </form>
     );
-};
+}

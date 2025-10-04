@@ -4,7 +4,7 @@
     border-radius: 30px;
 }
 
-.search_input, .search_button button {
+.search_input, .search_button {
     outline: none;
     border: none;
     background-color: transparent;
@@ -21,6 +21,6 @@
     height: 100%;
 }
 
-.search_button button {
+.search_button {
     font-size: 20px;
 }

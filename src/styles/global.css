@@ -57,6 +57,11 @@ button, input, textarea, select {
     box-shadow: 0 0 10px 0 var(--primary-theme-color);
 }
 
+.profile_back_btn {
+    margin-top: 20px;
+    width: 100px;
+}
+
 .link_text {
     color: inherit;
     text-decoration: inherit;
