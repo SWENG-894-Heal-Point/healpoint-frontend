@@ -1,5 +1,5 @@
 import {useEffect, useState} from "react";
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import {Sidebar, Menu, MenuItem} from 'react-pro-sidebar';
 import secureLocalStorage from "react-secure-storage";
 
@@ -15,9 +15,19 @@ import {getMenuItems} from "@/utils/getMenuItems.js";
 export default function Layout(props) {
     const [collapsed, setCollapsed] = useState(false);
     const [menuItems, setMenuItems] = useState([]);
+    const navigate = useNavigate();
 
     useEffect(() => {
         const token = secureLocalStorage.getItem("auth-token");
+        const tokenExpiry = secureLocalStorage.getItem("auth-token-expiry");
+        const currentTime = new Date().getTime();
+
+        if (!token || !tokenExpiry || currentTime > parseInt(tokenExpiry, 10)) {
+            secureLocalStorage.removeItem("auth-token");
+            secureLocalStorage.removeItem("auth-token-expiry");
+            navigate("/login");
+        }
+
         if (token) {
             const decoded = parseJwt(token);
             const role = decoded?.role;
