@@ -2,9 +2,11 @@ import { DataGrid } from '@mui/x-data-grid';
 import {Paper} from "@mui/material";
 
 import {transformText} from "@/utils/transformText.js";
+import {defaultDataGridStyle} from "@/utils/defaultDataGridStyle.js";
 import style from '@/styles/user-list.module.css';
 
 export default function UserTable({ users, setProfileData }) {
+    const dataGridStyle = defaultDataGridStyle();
     const columns = [
         { field: 'firstName', headerName: 'First Name', flex: 1 },
         { field: 'lastName', headerName: 'Last Name', flex: 1 },
@@ -35,12 +37,9 @@ export default function UserTable({ users, setProfileData }) {
                 initialState={{ pagination: { paginationModel } }}
                 pageSizeOptions={[5, 10, 20, 50]}
                 getRowId={(row) => row.id}
+                disableRowSelectionOnClick
                 className={style.user_table}
-                sx={{
-                    '& .MuiDataGrid-columnSeparator': {
-                        display: 'none',
-                    }
-                }}
+                sx={dataGridStyle}
             />
         </Paper>
 
