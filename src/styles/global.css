@@ -57,11 +57,6 @@ button, input, textarea, select {
     box-shadow: 0 0 10px 0 var(--primary-theme-color);
 }
 
-.profile_back_btn {
-    margin-top: 20px;
-    width: 100px;
-}
-
 .link_text {
     color: inherit;
     text-decoration: inherit;
@@ -83,4 +78,14 @@ button, input, textarea, select {
 
 .text-align-center {
     text-align: center;
+}
+
+.default_btn_group {
+    margin: 40px 0 20px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.default_btn_group button {
+    font-weight: bold;
 }
