@@ -66,8 +66,7 @@ test("Doctor can view a patient profile using search feature", async ({ page }) 
 
 test("Patient cannot access the patient list page", async ({ page }) => {
     // Log in as a Patient
-    await login(page, "jane.doe@example.com", "Pass125" +
-        "*");
+    await login(page, "jane.doe@example.com", "Pass125*");
 
     // Try to go to Patient List Page
     await page.goto("http://localhost:4173/patients");
