@@ -7,8 +7,10 @@ import secureLocalStorage from "react-secure-storage";
 import Layout from "@/components/common/Layout.jsx";
 import PrescriptionTable from "@/components/prescription/PrescriptionTable.jsx";
 import PrescriptionHeader from "@/components/prescription/PrescriptionHeader.jsx";
-import {handleError} from "@/utils/handleError.js";
 import PrescriptionInstruction from "@/components/prescription/PrescriptionInstruction.jsx";
+import {handleError} from "@/utils/handleError.js";
+import {parseJwt} from "@/utils/parseJwt.js";
+import DoctorPrescriptionActions from "@/components/prescription/DoctorPrescriptionActions.jsx";
 
 export default function PrescriptionPage() {
     const [prescriptionData, setPrescriptionData] = useState(null);
@@ -21,8 +23,11 @@ export default function PrescriptionPage() {
     const [error, setError] = useState("");
     const authToken = secureLocalStorage.getItem("auth-token");
 
+    const decoded = parseJwt(authToken);
+    const role = decoded?.role;
+
     const {state} = useLocation();
-    const profileId = state ? state.patientId : null;
+    const profileId = state ? state.patientId : 0;
 
     function validateChanges(items) {
         for (const item of items) {
@@ -65,7 +70,12 @@ export default function PrescriptionPage() {
             return;
         }
 
-        const payload = {token: authToken, patientId: profileId, instruction: instruction, prescriptionItems: prescriptionItems}
+        const payload = {
+            token: authToken,
+            patientId: profileId,
+            instruction: instruction,
+            prescriptionItems: prescriptionItems
+        }
 
         axios.post("/create-or-update-prescription", payload, {
             headers: {"Content-Type": "application/json"}
@@ -93,22 +103,18 @@ export default function PrescriptionPage() {
                 <div>
                     <PrescriptionHeader patientData={patientData} lastUpdated={lastUpdated}/>
                     <PrescriptionTable items={prescriptionItems} setItems={setPrescriptionItems} editable={editable}/>
-                    <PrescriptionInstruction instruction={instruction} setInstruction={setInstruction} editable={editable}/>
+                    <PrescriptionInstruction instruction={instruction} setInstruction={setInstruction}
+                                             editable={editable}/>
                     <Snackbar open={!!error} autoHideDuration={4000} onClose={() => setError("")}
-                        anchorOrigin={{vertical: "bottom", horizontal: "center"}}>
+                              anchorOrigin={{vertical: "bottom", horizontal: "center"}}>
                         <Alert severity="error" sx={{width: "100%"}}>{error}</Alert>
                     </Snackbar>
-                    {editable ?
-                        <div className="default_btn_group">
-                            <button className="default_btn" onClick={handleCancel}>Cancel</button>
-                            <button className="default_btn" onClick={handleSave}>Save</button>
-                        </div>
+                    {role.toLowerCase() === "patient" ?
+                        <p>Add Patient Actions</p>
                         :
-                        <div className="default_btn_group">
-                            <button className="default_btn" onClick={() => setEditable(true)}>
-                                {prescriptionItems.length > 0 ? "Edit Prescription" : "New Prescription"}
-                            </button>
-                        </div>
+                        <DoctorPrescriptionActions editable={editable} onEdit={() => setEditable(true)}
+                                                   onCancel={handleCancel} onSave={handleSave}
+                                                   hasPrescription={prescriptionItems.length > 0}/>
                     }
                 </div>
             </Layout>
