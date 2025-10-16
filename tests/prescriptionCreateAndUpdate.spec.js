@@ -1,17 +1,5 @@
 import {expect, test} from "@playwright/test";
-
-async function login(request, baseURL, email, password) {
-    const authResponse = await request.post(`${baseURL}/authenticate-user`, {
-        data: {
-            email: email,
-            password: password,
-        },
-        headers: {'Content-Type': 'application/json'},
-    });
-
-    expect(authResponse.ok()).toBeTruthy();
-    return await authResponse.text();
-}
+import {login} from "./helpers/auth.js";
 
 test('ST-14: Doctor creates a new prescription', async ({request, baseURL}) => {
     const token = await login(request, baseURL, 'brownr@healpoint.com', 'Pass123*');
