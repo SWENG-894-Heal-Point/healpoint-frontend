@@ -8,9 +8,10 @@ import Layout from "@/components/common/Layout.jsx";
 import PrescriptionTable from "@/components/prescription/PrescriptionTable.jsx";
 import PrescriptionHeader from "@/components/prescription/PrescriptionHeader.jsx";
 import PrescriptionInstruction from "@/components/prescription/PrescriptionInstruction.jsx";
+import DoctorPrescriptionActions from "@/components/prescription/DoctorPrescriptionActions.jsx";
+import RefillPrescriptionModal from "@/components/prescription/RefillPrescriptionModal.jsx";
 import {handleError} from "@/utils/handleError.js";
 import {parseJwt} from "@/utils/parseJwt.js";
-import DoctorPrescriptionActions from "@/components/prescription/DoctorPrescriptionActions.jsx";
 
 export default function PrescriptionPage() {
     const [prescriptionData, setPrescriptionData] = useState(null);
@@ -110,7 +111,7 @@ export default function PrescriptionPage() {
                         <Alert severity="error" sx={{width: "100%"}}>{error}</Alert>
                     </Snackbar>
                     {role.toLowerCase() === "patient" ?
-                        <p>Add Patient Actions</p>
+                        <RefillPrescriptionModal items={prescriptionItems}/>
                         :
                         <DoctorPrescriptionActions editable={editable} onEdit={() => setEditable(true)}
                                                    onCancel={handleCancel} onSave={handleSave}
