@@ -1,21 +1,13 @@
 import {expect, test} from "@playwright/test";
-
-
-async function login(page, email, password) {
-    await page.goto("http://localhost:4173/login");
-    await page.fill('input[name="email"]', email);
-    await page.fill('input[name="password"]', password);
-    await page.click("button[type='submit']");
-    await page.waitForTimeout(1000);
-}
+import {loginUsingUI} from "./helpers/authUI.js";
 
 async function loginAsDoctor(page) {
-    await login(page, "brownr@healpoint.com", "Pass123*");
+    await loginUsingUI(page, "brownr@healpoint.com", "Pass123*");
 }
 
 async function goToPatientList(page) {
-    await page.goto("http://localhost:4173/patients");
-    await page.waitForTimeout(1000);
+    await page.goto("http://localhost:4173/patients", { waitUntil: 'networkidle' });
+    await page.waitForTimeout(2000);
 }
 
 test("ST-19 Doctor can view a list of patients", async ({page}) => {
