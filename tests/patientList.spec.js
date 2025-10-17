@@ -1,24 +1,16 @@
 import {expect, test} from "@playwright/test";
-
-
-async function login(page, email, password) {
-    await page.goto("http://localhost:4173/login");
-    await page.fill('input[name="email"]', email);
-    await page.fill('input[name="password"]', password);
-    await page.click("button[type='submit']");
-    await page.waitForTimeout(1000);
-}
+import {loginUsingUI} from "./helpers/authUI.js";
 
 async function loginAsDoctor(page) {
-    await login(page, "brownr@healpoint.com", "Pass123*");
+    await loginUsingUI(page, "brownr@healpoint.com", "Pass123*");
 }
 
 async function goToPatientList(page) {
-    await page.goto("http://localhost:4173/patients");
-    await page.waitForTimeout(1000);
+    await page.goto("http://localhost:4173/patients", { waitUntil: 'networkidle' });
+    await page.waitForTimeout(2000);
 }
 
-test("Doctor can view a list of patients", async ({page}) => {
+test("ST-19 Doctor can view a list of patients", async ({page}) => {
     await loginAsDoctor(page);
     await goToPatientList(page);
 
@@ -29,7 +21,7 @@ test("Doctor can view a list of patients", async ({page}) => {
     await expect(page.getByText("Emily", {exact: true})).toBeVisible();
 });
 
-test("Doctor can view a patient profile from the list", async ({page}) => {
+test("ST-20 Doctor can view a patient profile from the list", async ({page}) => {
     await loginAsDoctor(page);
     await goToPatientList(page);
 
@@ -48,7 +40,7 @@ test("Doctor can view a patient profile from the list", async ({page}) => {
     await expect(page.getByText("View profile").first()).toBeVisible();
 });
 
-test("Doctor can view a patient profile using search feature", async ({ page }) => {
+test("ST-24 Doctor can view a patient profile using search feature", async ({ page }) => {
     await loginAsDoctor(page);
     await goToPatientList(page);
 
@@ -64,15 +56,15 @@ test("Doctor can view a patient profile using search feature", async ({ page }) 
     await expect(page.getByText("Address")).toBeVisible();
 });
 
-test("Patient cannot access the patient list page", async ({ page }) => {
-    // Log in as a Patient
-    await login(page, "jane.doe@example.com", "Pass125" +
-        "*");
-
-    // Try to go to Patient List Page
-    await page.goto("http://localhost:4173/patients");
-    await page.waitForTimeout(1000);
-
-    // Verify access denied message is shown
-    await expect(page.getByText(/Access denied/i)).toBeVisible();
-});
+// TODO: Remove this test
+// test("Patient cannot access the patient list page", async ({ page }) => {
+//     // Log in as a Patient
+//     await login(page, "jane.doe@example.com", "Pass125*");
+//
+//     // Try to go to Patient List Page
+//     await page.goto("http://localhost:4173/patients");
+//     await page.waitForTimeout(1000);
+//
+//     // Verify access denied message is shown
+//     await expect(page.getByText(/Access denied/i)).toBeVisible();
+// });

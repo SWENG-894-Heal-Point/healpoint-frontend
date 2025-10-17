@@ -1,0 +1,52 @@
+.instruction_container p,
+.prescription_header h2, .prescription_header p {
+    margin: 10px 0;
+}
+
+.prescription_header {
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.instruction_container {
+    background-color: var(--white-color);
+    padding: 10px;
+    border: 1px solid var(--grey-border-color);
+    margin-top: 20px;
+}
+
+.instruction_container .section_title {
+    font-weight: bold;
+}
+
+.instruction_container input {
+    width: 100%;
+    height: fit-content;
+    border: none;
+    outline: none;
+}
+
+.add_btn {
+    font-size: 32px;
+    color: var(--primary-theme-color);
+    padding-top: 10px;
+}
+
+.empty_prescription {
+    background-color: var(--white-color);
+    padding: 10px;
+    border: 1px solid var(--grey-border-color);
+}
+
+.button_group {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.error p {
+    color: var(--red-text-color);
+}
