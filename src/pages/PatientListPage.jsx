@@ -7,6 +7,7 @@ import Layout from "@/components/common/Layout.jsx";
 import SearchBar from "@/components/common/SearchBar.jsx";
 import PatientProfileView from "@/components/account/PatientProfileView.jsx";
 import UserTable from "@/components/UserTable.jsx";
+import {useNavigate} from "react-router-dom";
 
 
 export default function PatientListPage() {
@@ -14,6 +15,7 @@ export default function PatientListPage() {
     const [profileData, setProfileData] = useState(null);
     const [errorMessage, setErrorMessage] = useState("");
     const authToken = secureLocalStorage.getItem("auth-token");
+    const navigate = useNavigate();
 
     useEffect(() => {
         axios.get("/get-all-patients", {
@@ -30,6 +32,7 @@ export default function PatientListPage() {
                 handleError(err, setErrorMessage)
                 setProfileData(null);
             });
+        // eslint-disable-next-line
     }, []);
 
 
@@ -50,6 +53,12 @@ export default function PatientListPage() {
             });
     }
 
+    function handlePrescriptionClick() {
+        if (profileData && profileData.id) {
+            navigate("/prescription", {state: {patientId: profileData.id}});
+        }
+    }
+
     return (
         <>
             <Layout>
@@ -57,9 +66,14 @@ export default function PatientListPage() {
                 {profileData ?
                     <>
                         <PatientProfileView profileData={profileData}/>
-                        <button className="default_btn profile_back_btn" onClick={() => setProfileData(null)}>
-                            Back
-                        </button>
+                        <div className="default_btn_group">
+                            <button className="default_btn" onClick={() => setProfileData(null)}>
+                                Back
+                            </button>
+                            <button className="default_btn" onClick={handlePrescriptionClick}>
+                                Prescription
+                            </button>
+                        </div>
                     </>:
                     allPatients.length > 0 && <UserTable users={allPatients} setProfileData={setProfileData} />
                 }

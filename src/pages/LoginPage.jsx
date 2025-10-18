@@ -30,7 +30,9 @@ const LoginPage = () => {
         })
             .then((response) => {
                 if (response.status === 200) {
+                    const expiryTime = new Date().getTime() + 60 * 60 * 1000;
                     secureLocalStorage.setItem("auth-token", response.data);
+                    secureLocalStorage.setItem("auth-token-expiry", expiryTime.toString());
                     navigate("/");
                 }
             })
