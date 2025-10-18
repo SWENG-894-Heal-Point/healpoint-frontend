@@ -62,6 +62,7 @@ export default function PrescriptionPage() {
             handleError(err, setError)
             setPrescriptionData(null);
         });
+        // eslint-disable-next-line
     }, []);
 
     function handleSave() {

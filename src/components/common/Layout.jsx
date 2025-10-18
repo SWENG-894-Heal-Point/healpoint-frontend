@@ -44,6 +44,7 @@ export default function Layout(props) {
                 setMenuItems(getMenuItems(role));
             }
         }
+        // eslint-disable-next-line
     }, []);
 
     return (

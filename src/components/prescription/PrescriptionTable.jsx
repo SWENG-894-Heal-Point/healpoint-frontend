@@ -34,6 +34,7 @@ export default function PrescriptionTable({items, setItems, editable}) {
         if (editable && items.length === 0) {
             handleAddItem();
         }
+        // eslint-disable-next-line
     }, [editable]);
 
     function handleProcessRowUpdate(updatedRow) {

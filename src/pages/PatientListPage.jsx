@@ -32,6 +32,7 @@ export default function PatientListPage() {
                 handleError(err, setErrorMessage)
                 setProfileData(null);
             });
+        // eslint-disable-next-line
     }, []);
 
 
