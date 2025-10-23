@@ -17,10 +17,17 @@ export default function PatientListPage() {
     const authToken = secureLocalStorage.getItem("auth-token");
     const navigate = useNavigate();
 
+    const columns = [
+        {field: 'firstName', headerName: 'First Name', flex: 1},
+        {field: 'lastName', headerName: 'Last Name', flex: 1},
+        {field: 'dateOfBirth', headerName: 'Date of Birth', flex: 1},
+        {field: 'gender', headerName: 'Gender', flex: 1},
+    ];
+
     useEffect(() => {
         axios.get("/get-all-patients", {
-            params: { token: authToken },
-            headers: { "Content-Type": "application/json" }
+            params: {token: authToken},
+            headers: {"Content-Type": "application/json"}
         })
             .then((response) => {
                 if (response.status === 200) {
@@ -74,8 +81,9 @@ export default function PatientListPage() {
                                 Prescription
                             </button>
                         </div>
-                    </>:
-                    allPatients.length > 0 && <UserTable users={allPatients} setProfileData={setProfileData} />
+                    </> :
+                    allPatients.length > 0 &&
+                    <UserTable users={allPatients} setProfileData={setProfileData} columns={columns}/>
                 }
                 {!profileData && errorMessage && <p>{errorMessage}</p>}
             </Layout>
