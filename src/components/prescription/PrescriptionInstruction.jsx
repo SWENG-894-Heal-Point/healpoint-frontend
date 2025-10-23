@@ -2,7 +2,7 @@ import style from "@/styles/prescription.module.css";
 
 export default function PrescriptionInstruction({instruction, setInstruction, editable}) {
     return (
-        instruction &&
+        (instruction || editable) &&
         <div className={style.instruction_container}>
             <p className={style.section_title}>Instruction:</p>
             <input
