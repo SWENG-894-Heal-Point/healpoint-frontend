@@ -7,10 +7,12 @@ import DoctorProfileView from "@/components/account/DoctorProfileView.jsx";
 import SearchBar from "@/components/common/SearchBar.jsx";
 import {handleError} from "@/utils/handleError.js";
 import UserTable from "@/components/UserTable.jsx";
+import {advancedSearch} from "@/utils/advancedSearch.js";
 
 
 export default function DoctorDirectoryPage() {
     const [allDoctors, setAllDoctors] = useState([]);
+    const [filteredDoctors, setFilteredDoctors] = useState([]);
     const [profileData, setProfileData] = useState(null);
     const [errorMessage, setErrorMessage] = useState("");
     const authToken = secureLocalStorage.getItem("auth-token");
@@ -26,23 +28,18 @@ export default function DoctorDirectoryPage() {
     useEffect(() => {
         axios.get("/get-all-doctors", {
             headers: {"Content-Type": "application/json"}
-        })
-            .then((response) => {
-                if (response.status === 200) {
-                    console.log(response);
-                    setAllDoctors(response.data);
-                }
-            })
-            .catch((err) => {
-                handleError(err, setErrorMessage)
-                setProfileData(null);
-            });
-        // eslint-disable-next-line
+        }).then((response) => {
+            if (response.status === 200) {
+                console.log(response);
+                setAllDoctors(response.data);
+            }
+        }).catch((err) => {
+            handleError(err, setErrorMessage)
+            setProfileData(null);
+        });
     }, []);
 
-    function handleSearch(email) {
-        const emailValue = typeof email === "object" && email.target ? email.target.value : email;
-
+    function handleEmailSearch(emailValue) {
         axios.post("get-doctor-profile", {token: authToken, email: emailValue}, {
             headers: {"Content-Type": "application/json"}
         })
@@ -57,9 +54,21 @@ export default function DoctorDirectoryPage() {
             });
     }
 
+    function handleGenericSearch(query) {
+        const filteredResult = advancedSearch(allDoctors, query);
+        if (!filteredResult || filteredResult.length === 0) {
+            setErrorMessage("No doctors found matching the search criteria.");
+        } else {
+            setErrorMessage("");
+            setFilteredDoctors(filteredResult);
+        }
+    }
+
     return (
         <Layout>
-            <SearchBar handleSearch={handleSearch}/>
+            <SearchBar handleEmailSearch={handleEmailSearch} handleGenericSearch={handleGenericSearch}
+                       enableClear={filteredDoctors.length > 0} handleClear={() => setFilteredDoctors([])}/>
+            {!profileData && errorMessage && <p>{errorMessage}</p>}
             {profileData ?
                 <>
                     <DoctorProfileView profileData={profileData}/>
@@ -71,9 +80,9 @@ export default function DoctorDirectoryPage() {
                 </>
                 :
                 allDoctors.length > 0 &&
-                <UserTable users={allDoctors} setProfileData={setProfileData} columns={columns}/>
+                <UserTable users={filteredDoctors.length > 0 ? filteredDoctors : allDoctors}
+                           setProfileData={setProfileData} columns={columns}/>
             }
-            {!profileData && errorMessage && <p>{errorMessage}</p>}
         </Layout>
     );
 };

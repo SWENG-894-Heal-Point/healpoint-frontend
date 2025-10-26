@@ -8,10 +8,12 @@ import SearchBar from "@/components/common/SearchBar.jsx";
 import PatientProfileView from "@/components/account/PatientProfileView.jsx";
 import UserTable from "@/components/UserTable.jsx";
 import {useNavigate} from "react-router-dom";
+import {advancedSearch} from "@/utils/advancedSearch.js";
 
 
 export default function PatientListPage() {
     const [allPatients, setAllPatients] = useState([]);
+    const [filteredPatients, setFilteredPatients] = useState([]);
     const [profileData, setProfileData] = useState(null);
     const [errorMessage, setErrorMessage] = useState("");
     const authToken = secureLocalStorage.getItem("auth-token");
@@ -28,24 +30,20 @@ export default function PatientListPage() {
         axios.get("/get-all-patients", {
             params: {token: authToken},
             headers: {"Content-Type": "application/json"}
-        })
-            .then((response) => {
-                if (response.status === 200) {
-                    console.log(response);
-                    setAllPatients(response.data);
-                }
-            })
-            .catch((err) => {
-                handleError(err, setErrorMessage)
-                setProfileData(null);
-            });
+        }).then((response) => {
+            if (response.status === 200) {
+                console.log(response);
+                setAllPatients(response.data);
+            }
+        }).catch((err) => {
+            handleError(err, setErrorMessage)
+            setProfileData(null);
+        });
         // eslint-disable-next-line
     }, []);
 
 
-    function handleSearch(email) {
-        const emailValue = typeof email === "object" && email.target ? email.target.value : email;
-
+    function handleEmailSearch(emailValue) {
         axios.post("/get-patient-profile", {token: authToken, email: emailValue}, {
             headers: {"Content-Type": "application/json"}
         })
@@ -60,6 +58,17 @@ export default function PatientListPage() {
             });
     }
 
+    function handleGenericSearch(query) {
+        const filteredResult = advancedSearch(allPatients, query);
+
+        if (!filteredResult || filteredResult.length === 0) {
+            setErrorMessage("No patients found matching the search criteria.");
+        } else {
+            setErrorMessage("");
+            setFilteredPatients(filteredResult);
+        }
+    }
+
     function handlePrescriptionClick() {
         if (profileData && profileData.id) {
             navigate("/prescription", {state: {patientId: profileData.id}});
@@ -69,7 +78,9 @@ export default function PatientListPage() {
     return (
         <>
             <Layout>
-                <SearchBar handleSearch={handleSearch}/>
+                <SearchBar handleEmailSearch={handleEmailSearch} handleGenericSearch={handleGenericSearch}
+                           enableClear={filteredPatients.length > 0} handleClear={() => setFilteredPatients([])}/>
+                {!profileData && errorMessage && <p>{errorMessage}</p>}
                 {profileData ?
                     <>
                         <PatientProfileView profileData={profileData}/>
@@ -83,9 +94,9 @@ export default function PatientListPage() {
                         </div>
                     </> :
                     allPatients.length > 0 &&
-                    <UserTable users={allPatients} setProfileData={setProfileData} columns={columns}/>
+                    <UserTable users={filteredPatients.length > 0 ? filteredPatients : allPatients}
+                               setProfileData={setProfileData} columns={columns}/>
                 }
-                {!profileData && errorMessage && <p>{errorMessage}</p>}
             </Layout>
         </>
     );
