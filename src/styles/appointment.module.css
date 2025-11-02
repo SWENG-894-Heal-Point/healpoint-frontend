@@ -1,0 +1,62 @@
+.single_btn_section {
+    margin: 10px 0;
+    display: flex;
+    justify-content: end;
+}
+
+.bottom_btn_section {
+    margin: 40px 0 20px;
+}
+
+.schedule_appointment_container {
+    min-width: 550px;
+    margin-bottom: 40px;
+    display: flex;
+    gap: 40px;
+    justify-content: space-around;
+}
+
+.section h3 {
+    margin: 10px 0 16px 0;
+}
+
+.section label {
+    display: flex;
+    flex-direction: row;
+    margin: 10px 0;
+}
+
+.provider_section h3 {
+    margin-top: 30px;
+}
+
+.appointment_slots_page h2 {
+    text-align: center;
+}
+
+.slots_container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+    gap: 10px;
+    justify-items: center;
+}
+
+.slot_button {
+    padding: 0.5rem 1rem;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    background-color: white;
+    cursor: pointer;
+    /*transition: all 0.1s;*/
+}
+
+.slot_button:hover {
+    background-color: #f1f1f1;
+    color: var(--black-color);
+}
+
+.selected_slot,
+.selected_slot:hover {
+    background-color: #1b76d1;
+    color: var(--white-color);
+}

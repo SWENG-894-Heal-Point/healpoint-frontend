@@ -89,3 +89,9 @@ button, input, textarea, select {
 .default_btn_group button {
     font-weight: bold;
 }
+
+.default_error {
+    color: var(--red-text-color);
+    font-weight: bold;
+    text-align: center;
+}
