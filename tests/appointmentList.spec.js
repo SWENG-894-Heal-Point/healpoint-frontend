@@ -15,7 +15,7 @@ test('ST-28: Patient can access all appointments', async ({request, baseURL}) =>
     expect(appointmentResponse.ok()).toBeTruthy();
     const appointmentList = await appointmentResponse.json();
 
-    // Verify the appointment list is empty
+    // Verify the appointment list is not empty
     expect(Array.isArray(appointmentList)).toBeTruthy();
     expect(appointmentList.length).toBe(4);
 
