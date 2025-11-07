@@ -1,19 +1,54 @@
-import Layout from "@/components/common/Layout.jsx";
-import style from '@/styles/appointment.module.css';
+import {useEffect, useState} from "react";
 import {useNavigate} from "react-router-dom";
+import axios from "axios";
+import secureLocalStorage from "react-secure-storage";
+
+import AppointmentContainer from "@/components/appointment/AppointmentContainer.jsx";
+import Layout from "@/components/common/Layout.jsx";
+import Error from "@/components/common/Error.jsx";
+import {handleError} from "@/utils/handleError.js";
+import {parseJwt} from "@/utils/parseJwt.js";
+import style from '@/styles/appointment.module.css';
 
 
 export default function AppointmentListPage() {
+    const [error, setError] = useState("");
+    const [appointmentData, setAppointmentData] = useState([]);
+
+    const authToken = secureLocalStorage.getItem("auth-token");
+    const role = parseJwt(authToken)?.role?.toLowerCase();
     const navigate = useNavigate();
+
+    const upcomingAppointments = appointmentData.filter(a => a.status === "SCHEDULED");
+    const pastAppointments = appointmentData.filter(a => a.status !== "SCHEDULED");
+
+    useEffect(() => {
+        axios.get("/get-my-appointments", {
+            params: {token: authToken}, headers: {"Content-Type": "application/json"}
+        }).then((response) => {
+            if (response.status === 200) {
+                console.log(response.data)
+                setAppointmentData(response.data);
+            }
+        }).catch((err) => {
+            handleError(err, setError)
+            setAppointmentData([]);
+        });
+        // eslint-disable-next-line
+    }, []);
 
     return (
         <>
             <Layout>
-                <div className={style.single_btn_section}>
+                {role.toLowerCase() === "patient" &&
+                    <div className={style.single_btn_section}>
                     <button className="default_btn" onClick={() => navigate("/schedule-appointment")}>
                         New Appointment
                     </button>
-                </div>
+                </div>}
+                <Error message={error}/>
+                <AppointmentContainer appointmentList={upcomingAppointments} title="Upcoming Appointments" isScheduled={true} />
+                <AppointmentContainer appointmentList={pastAppointments} title="Past Appointments" isScheduled={false} />
             </Layout>
         </>
     );

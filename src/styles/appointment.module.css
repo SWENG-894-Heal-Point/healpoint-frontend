@@ -60,3 +60,45 @@
     background-color: #1b76d1;
     color: var(--white-color);
 }
+
+.appointment_section h3 {
+    color: var(--navy-blue-bg-color);
+    margin-top: 30px;
+    margin-bottom: 20px;
+}
+
+.appointment_container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 10px;
+    justify-items: center;
+}
+
+.appointment_card {
+    min-width: 260px;
+    background-color: var(--white-color);
+    border-radius: 20px;
+    padding: 20px;
+    margin-bottom: 10px;
+}
+
+.appointment_card .card_title {
+    font-weight: bold;
+}
+
+.appointment_card .icon_line {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin: 8px 0;
+}
+
+.appointment_actions {
+    display: flex;
+    justify-content: space-between;
+}
+
+.appointment_actions div {
+    color: var(--primary-theme-color);
+    cursor: pointer;
+}
