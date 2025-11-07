@@ -47,6 +47,12 @@ export default function AppointmentListPage() {
                     </button>
                 </div>}
                 <Error message={error}/>
+                {
+                    appointmentData.length === 0 && !error &&
+                    <div className={style.empty_appointment_list}>
+                        You have no past or upcoming appointments.
+                    </div>
+                }
                 <AppointmentContainer appointmentList={upcomingAppointments} title="Upcoming Appointments" isScheduled={true} />
                 <AppointmentContainer appointmentList={pastAppointments} title="Past Appointments" isScheduled={false} />
             </Layout>

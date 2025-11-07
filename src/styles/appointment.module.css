@@ -102,3 +102,10 @@
     color: var(--primary-theme-color);
     cursor: pointer;
 }
+
+.empty_appointment_list {
+    background-color: var(--white-color);
+    margin-top: 30px;
+    padding: 10px;
+    border: 1px solid var(--grey-border-color);
+}
