@@ -15,7 +15,7 @@ import style from '@/styles/appointment.module.css';
 export default function ScheduleAppointmentPage() {
     const [selectedDate, setSelectedDate] = useState(null);
     const [selectedSlot, setSelectedSlot] = useState(null);
-    const [selectedReason, setSelectedReason] = useState("follow-up");
+    const [selectedReason, setSelectedReason] = useState(null);
     const [selectedProviders, setSelectedProviders] = useState(["all"]);
     const [availableDates, setAvailableDates] = useState([]);
     const [isContinue, setIsContinue] = useState(false);
@@ -41,6 +41,10 @@ export default function ScheduleAppointmentPage() {
     }, []);
 
     function handleContinue() {
+        if (selectedReason === null) {
+            setErrorMessage("Please select a reason for the appointment.");
+            return;
+        }
         if (selectedDate) {
             setIsContinue(true)
             setErrorMessage("")

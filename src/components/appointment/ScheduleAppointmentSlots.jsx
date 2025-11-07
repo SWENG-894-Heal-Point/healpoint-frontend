@@ -2,6 +2,7 @@ import {useEffect, useState} from "react";
 import secureLocalStorage from "react-secure-storage";
 import axios from "axios";
 
+import {formatTime} from "@/utils/formatTime.js";
 import {handleError} from "@/utils/handleError.js";
 import style from '@/styles/appointment.module.css';
 
@@ -65,12 +66,4 @@ export default function ScheduleAppointmentSlots({selectedSlot, setSelectedSlot,
                 )) : <p>No available slots for the selected date and providers.</p>}
         </div>
     );
-}
-
-function formatTime(time24) {
-    const [hour, minute] = time24.split(":").map(Number);
-    const date = new Date();
-    date.setHours(hour);
-    date.setMinutes(minute);
-    return date.toLocaleTimeString([], {hour: "2-digit", minute: "2-digit"});
 }

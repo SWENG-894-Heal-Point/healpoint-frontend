@@ -8,9 +8,9 @@ export default function ScheduleAppointmentFilter({
                                                       setSelectedProviders
                                                   }) {
     const reasons = [
-        {label: "Follow-up visit", value: "follow-up"},
-        {label: "Discuss a new problem", value: "new-problem"},
-        {label: "Annual physical exam", value: "annual-exam"},
+        {label: "Follow-up visit", value: "Follow-up visit"},
+        {label: "Discuss a new problem", value: "Discuss a new problem"},
+        {label: "Annual physical exam", value: "Annual physical exam"},
     ];
 
     function onProviderChange(e) {
