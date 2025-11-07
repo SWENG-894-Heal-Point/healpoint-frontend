@@ -18,7 +18,7 @@ export default function AppointmentCard({appointment, isScheduled}) {
     const appointmentTime = `${formatTime(appointment.startTime)} - ${formatTime(appointment.endTime)}`;
 
     const iconStyle = {color: 'var(--navy-blue-bg-color)'};
-    const currentDate = new Date(2025, 11, 22);
+    const currentDate = new Date();
 
     return (
         <div className={style.appointment_card}>
