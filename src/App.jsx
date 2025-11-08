@@ -15,6 +15,7 @@ import PatientListPage from "@/pages/PatientListPage.jsx";
 import PrescriptionPage from "@/pages/PrescriptionPage.jsx";
 import AppointmentListPage from "@/pages/AppointmentListPage.jsx";
 import ScheduleAppointmentPage from "@/pages/ScheduleAppointmentPage.jsx";
+import RescheduleAppointmentPage from "@/pages/RescheduleAppointmentPage.jsx";
 
 function App() {
     axios.defaults.baseURL = import.meta.env.VITE_API_URL;
@@ -39,6 +40,7 @@ function App() {
             <Route path="/signup" element={<SignupPage/>}/>
             <Route path="/appointments" element={<AppointmentListPage/>}/>
             <Route path="/schedule-appointment" element={<ScheduleAppointmentPage/>}/>
+            <Route path="/reschedule-appointment" element={<RescheduleAppointmentPage/>}/>
             <Route path="/prescription" element={<PrescriptionPage/>}/>
             <Route path="/patients" element={<PatientListPage/>}/>
             <Route path="/doctors" element={<DoctorDirectoryPage/>}/>
