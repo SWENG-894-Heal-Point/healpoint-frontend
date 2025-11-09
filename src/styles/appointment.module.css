@@ -109,3 +109,26 @@
     padding: 10px;
     border: 1px solid var(--grey-border-color);
 }
+
+.button_group {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.appointment_modal_prompt {
+    line-height: 1.5;
+}
+
+.appointment_update_inputs {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 20px;
+    margin-bottom: 30px;
+}
+
+.error p {
+    color: var(--red-text-color);
+}

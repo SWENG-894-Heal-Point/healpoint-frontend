@@ -11,7 +11,7 @@ export default function ScheduleAppointmentCalendar({
                                                         selectedDate,
                                                         setSelectedDate
                                                     }) {
-    const today = new Date();
+    const today =  addDays(new Date(), 1);
     const maxDate = addDays(today, 90);
 
     const filteredDates = [
