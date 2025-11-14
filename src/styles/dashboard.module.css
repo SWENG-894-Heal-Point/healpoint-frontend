@@ -1,0 +1,16 @@
+.dashboard_top_section {
+    min-width: 300px;
+    max-width: 800px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+    justify-items: center;
+}
+
+.contact_info {
+    min-width: 300px;
+}
+
+.contact_info div {
+    margin: 16px 0;
+}
