@@ -16,7 +16,7 @@ import {handleError} from "@/utils/handleError.js";
 
 export default function UpdateAccountPage() {
     const [profileData, setProfileData] = useState(null);
-    const [role, setRole] = useState("Patient");
+    const [role, setRole] = useState("patient");
     const [errorMessage, setErrorMessage] = useState("");
     const authToken = secureLocalStorage.getItem("auth-token");
 
@@ -79,12 +79,12 @@ export default function UpdateAccountPage() {
                                 <Field name="phone" placeholder="Phone No (e.g. 2155551234)" type="tel"
                                        pattern="[0-9]{10}" maxLength="10" required/>
                                 <Field id="email" name="email" placeholder="Email" type="email" required/>
-                                {role === "Patient" ?
+                                {role.toLowerCase() === "patient" ?
                                     <Field name="insuranceProvider" placeholder="Insurance Provider" type="text"/> :
                                     <Field name="languages" placeholder="Languages Spoken" type="text"/>}
                             </div>
                             <div className={style.right_column}>
-                                {role === "Patient" ?
+                                {role.toLowerCase() === "patient" ?
                                     <>
                                         <Field name="streetAddress" placeholder="Street Address" type="text" required/>
                                         <Field name="city" placeholder="City" type="text" required/>

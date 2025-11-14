@@ -86,7 +86,7 @@
     font-weight: bold;
 }
 
-.appointment_card .icon_line {
+.icon_line {
     display: flex;
     align-items: center;
     gap: 8px;

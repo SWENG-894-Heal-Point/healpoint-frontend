@@ -30,7 +30,6 @@ export default function DoctorDirectoryPage() {
             headers: {"Content-Type": "application/json"}
         }).then((response) => {
             if (response.status === 200) {
-                console.log(response);
                 setAllDoctors(response.data);
             }
         }).catch((err) => {
