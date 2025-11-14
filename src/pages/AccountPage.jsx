@@ -14,7 +14,7 @@ import ChangePasswordModal from "../components/account/ChangePasswordModal.jsx";
 export default function AccountPage() {
     const [openModal, setOpenModal] = useState(false);
     const [profileData, setProfileData] = useState(null);
-    const [role, setRole] = useState("Patient");
+    const [role, setRole] = useState("patient");
     const authToken = secureLocalStorage.getItem("auth-token");
 
     useEffect(() => {
@@ -27,8 +27,8 @@ export default function AccountPage() {
     return (
         <>
             <Layout>
-                {role === "Doctor" && profileData && <DoctorProfileView profileData={profileData}/>}
-                {role === "Patient" && profileData && <PatientProfileView profileData={profileData}/>}
+                {role.toLowerCase() === "doctor" && profileData && <DoctorProfileView profileData={profileData}/>}
+                {role.toLowerCase() === "patient" && profileData && <PatientProfileView profileData={profileData}/>}
                 {profileData && <div className={style.button_group}>
                     <Link to="/update-account">
                         <button className="default_btn">Edit</button>

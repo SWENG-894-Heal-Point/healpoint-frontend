@@ -1,14 +1,14 @@
-import {test, expect} from "@playwright/test";
+import {expect, test} from "@playwright/test";
 
 test.describe("ST-5 Patients cannot access Doctor-only functionality", () => {
-    test("Patient cannot update a doctor's NPI number", async ({ request, baseURL }) => {
+    test("Patient cannot update a doctor's NPI number", async ({request, baseURL}) => {
         // Log in as Patient
         const loginRes = await request.post(`${baseURL}/authenticate-user`, {
             data: {
                 email: "emiDavis@email.com",   // existing patient
                 password: "Pass127*"
             },
-            headers: { "Content-Type": "application/json" }
+            headers: {"Content-Type": "application/json"}
         });
 
         expect(loginRes.ok()).toBeTruthy();
@@ -20,7 +20,7 @@ test.describe("ST-5 Patients cannot access Doctor-only functionality", () => {
         const updateRes = await request.post(`${baseURL}/update-my-profile`, {
             data: {
                 token: patientToken,
-                role: "Doctor",
+                role: "DOCTOR",
                 gender: 'Male',
                 email: 'brownr@healpoint.com',
                 phone: '5551234567',
@@ -28,7 +28,7 @@ test.describe("ST-5 Patients cannot access Doctor-only functionality", () => {
                 specialty: 'Cardiology',
                 npiNumber: "9876543210",
             },
-            headers: { "Content-Type": "application/json" }
+            headers: {"Content-Type": "application/json"}
         });
 
         expect(updateRes.status()).not.toBe(200);
@@ -38,14 +38,14 @@ test.describe("ST-5 Patients cannot access Doctor-only functionality", () => {
 });
 
 test.describe("ST-6 Patients cannot access Doctor-only functionality", () => {
-    test("Doctor cannot update a patient's gender", async ({ request, baseURL }) => {
+    test("Doctor cannot update a patient's gender", async ({request, baseURL}) => {
         // Log in as Patient
         const loginRes = await request.post(`${baseURL}/authenticate-user`, {
             data: {
                 email: "millers@healpoint.com",   // existing patient
                 password: "Pass123*"
             },
-            headers: { "Content-Type": "application/json" }
+            headers: {"Content-Type": "application/json"}
         });
 
         expect(loginRes.ok()).toBeTruthy();
@@ -57,7 +57,7 @@ test.describe("ST-6 Patients cannot access Doctor-only functionality", () => {
         const updateRes = await request.post(`${baseURL}/update-my-profile`, {
             data: {
                 token: doctorToken,
-                role: "Patient",
+                role: "PATIENT",
                 gender: 'Male',
                 email: 'jane.doe@example.com',
                 phone: '5551234567',
@@ -66,7 +66,7 @@ test.describe("ST-6 Patients cannot access Doctor-only functionality", () => {
                 state: 'CA',
                 zipCode: '12345',
             },
-            headers: { "Content-Type": "application/json" }
+            headers: {"Content-Type": "application/json"}
         });
 
         expect(updateRes.status()).not.toBe(200);
@@ -76,7 +76,7 @@ test.describe("ST-6 Patients cannot access Doctor-only functionality", () => {
 });
 
 test.describe("ST-7 Logged-in user updates profile field", () => {
-    test("User can update phone number and see it persist after reload", async ({ page }) => {
+    test("User can update phone number and see it persist after reload", async ({page}) => {
         await page.goto("http://localhost:4173/login");
         await page.fill('input[name="email"]', "jane.doe@example.com");
         await page.fill('input[name="password"]', "Pass125*");
@@ -138,14 +138,14 @@ test.describe("ST-12 Patients cannot access other patients' profiles", () => {
 });
 
 test.describe("ST-13 Doctor can access patient profiles", () => {
-    test("Doctor is able to view Patient B's profile", async ({ request , baseURL}) => {
+    test("Doctor is able to view Patient B's profile", async ({request, baseURL}) => {
         // Step 1: Log in as Doctor
         const loginRes = await request.post(`${baseURL}/authenticate-user`, {
             data: {
                 email: "brownr@healpoint.com",
                 password: "Pass123*"
             },
-            headers: { "Content-Type": "application/json" }
+            headers: {"Content-Type": "application/json"}
         });
 
         expect(loginRes.ok()).toBeTruthy();
@@ -158,7 +158,7 @@ test.describe("ST-13 Doctor can access patient profiles", () => {
                 token: doctorToken,
                 email: "jane.doe@example.com"
             },
-            headers: { "Content-Type": "application/json" }
+            headers: {"Content-Type": "application/json"}
         });
 
         // Expected: Doctor can access patient info
