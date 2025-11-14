@@ -84,7 +84,7 @@ export default function UpdateAccountPage() {
                                     <Field name="languages" placeholder="Languages Spoken" type="text"/>}
                             </div>
                             <div className={style.right_column}>
-                                {role.toLowerCase() === "Patient" ?
+                                {role.toLowerCase() === "patient" ?
                                     <>
                                         <Field name="streetAddress" placeholder="Street Address" type="text" required/>
                                         <Field name="city" placeholder="City" type="text" required/>
