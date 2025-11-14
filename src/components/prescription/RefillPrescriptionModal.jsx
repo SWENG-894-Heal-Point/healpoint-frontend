@@ -29,7 +29,6 @@ export default function RefillPrescriptionModal({items}) {
         }
 
         setError("");
-        console.log("Selected medications:", selectedMedications);
 
         axios.post("/request-prescription-refill", {token:authToken, medications:selectedMedications}, {
             headers: {"Content-Type": "application/json"}
