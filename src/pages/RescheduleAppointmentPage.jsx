@@ -7,10 +7,10 @@ import ScheduleAppointmentCalendar from "@/components/appointment/ScheduleAppoin
 import ScheduleAppointmentSlots from "@/components/appointment/ScheduleAppointmentSlots.jsx";
 import Layout from "@/components/common/Layout.jsx";
 import Error from "@/components/common/Error.jsx";
+import {useAvailableAppointmentDates} from "@/utils/useAvailableAppointmentDates.js";
 import {handleError} from "@/utils/handleError.js";
 import {formatDate} from "@/utils/formatDate.js";
 import style from "@/styles/appointment.module.css";
-import {useAvailableAppointmentDates} from "@/utils/useAvailableAppointmentDates.js";
 
 export default function RescheduleAppointmentPage() {
     const {state} = useLocation();

@@ -1,3 +1,4 @@
+import {transformText} from "@/utils/transformText.js";
 import style from "@/styles/prescription.module.css";
 
 export default function PrescriptionTable({patientData, lastUpdated}) {
@@ -8,7 +9,7 @@ export default function PrescriptionTable({patientData, lastUpdated}) {
                     <>
                         <h2>{patientData.firstName} {patientData.lastName}</h2>
                         <p>Date of Birth: {patientData.dateOfBirth}</p>
-                        <p>Gender: {patientData.gender}</p>
+                        <p>Gender: {transformText(patientData.gender, "sentence")}</p>
                     </>}
             </div>
             <div>

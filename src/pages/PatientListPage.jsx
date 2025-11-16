@@ -32,7 +32,6 @@ export default function PatientListPage() {
             headers: {"Content-Type": "application/json"}
         }).then((response) => {
             if (response.status === 200) {
-                console.log(response);
                 setAllPatients(response.data);
             }
         }).catch((err) => {
