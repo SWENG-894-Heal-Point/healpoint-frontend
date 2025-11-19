@@ -17,8 +17,12 @@ export default function NotificationTable({notificationData}) {
     const dataGridStyle = defaultDataGridStyle();
     const paginationModel = {page: 0, pageSize: 5};
 
+    if (rows.length === 0) {
+        return null;
+    }
+
     return (
-        <Paper sx={{width: '100%', maxWidth: '900px'}}>
+        <Paper sx={{width: '100%', maxWidth: '800px'}}>
             <DataGrid
                 rows={rows}
                 columns={columns}
