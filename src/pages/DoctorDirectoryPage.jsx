@@ -8,6 +8,7 @@ import SearchBar from "@/components/common/SearchBar.jsx";
 import {handleError} from "@/utils/handleError.js";
 import UserTable from "@/components/UserTable.jsx";
 import {advancedSearch} from "@/utils/advancedSearch.js";
+import {fetchUserList} from "@/utils/fetchUserList.js";
 
 
 export default function DoctorDirectoryPage() {
@@ -26,16 +27,8 @@ export default function DoctorDirectoryPage() {
     ];
 
     useEffect(() => {
-        axios.get("/get-all-doctors", {
-            headers: {"Content-Type": "application/json"}
-        }).then((response) => {
-            if (response.status === 200) {
-                setAllDoctors(response.data);
-            }
-        }).catch((err) => {
-            handleError(err, setErrorMessage)
-            setProfileData(null);
-        });
+        fetchUserList("/get-all-doctors", authToken, setAllDoctors, setErrorMessage, setProfileData);
+        // eslint-disable-next-line
     }, []);
 
     function handleEmailSearch(emailValue) {
