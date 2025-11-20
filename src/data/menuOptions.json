@@ -2,45 +2,55 @@
   "doctorMenu": [
     {
       "label": "Dashboard",
-      "path": "/"
+      "path": "/",
+      "icon": "dashboard"
     },
     {
       "label": "Appointments",
-      "path": "/appointments"
+      "path": "/appointments",
+      "icon": "event"
     },
     {
       "label": "Patient List",
-      "path": "/patients"
+      "path": "/patients",
+      "icon": "personal_injury"
     },
     {
       "label": "Doctor Directory",
-      "path": "/doctors"
+      "path": "/doctors",
+      "icon": "medical_services"
     },
     {
       "label": "Account",
-      "path": "/account"
+      "path": "/account",
+      "icon": "account_circle"
     }
   ],
   "patientMenu": [
     {
       "label": "Dashboard",
-      "path": "/"
+      "path": "/",
+      "icon": "dashboard"
     },
     {
       "label": "Appointments",
-      "path": "/appointments"
+      "path": "/appointments",
+      "icon": "event"
     },
     {
       "label": "Prescription",
-      "path": "/prescription"
+      "path": "/prescription",
+      "icon": "local_pharmacy"
     },
     {
       "label": "Doctor Directory",
-      "path": "/doctors"
+      "path": "/doctors",
+      "icon": "medical_services"
     },
     {
       "label": "Account",
-      "path": "/account"
+      "path": "/account",
+      "icon": "account_circle"
     }
   ]
 }
