@@ -52,7 +52,10 @@ export default function PatientListPage() {
         const filteredResult = advancedSearch(allPatients, query);
 
         if (!filteredResult || filteredResult.length === 0) {
-            setErrorMessage("No patients found matching the search criteria.");
+            setErrorMessage("No patient was found that matches the search criteria.");
+            setTimeout(() => {
+                setErrorMessage("");
+            }, 5000);
         } else {
             setErrorMessage("");
             setFilteredPatients(filteredResult);

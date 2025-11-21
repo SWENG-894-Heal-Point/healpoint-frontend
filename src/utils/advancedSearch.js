@@ -12,7 +12,8 @@ export function advancedSearch(dataArray, query) {
             item.dateOfBirth,
             item.phone,
             item.email,
-            item.specialty
+            item.specialty,
+            item.role
         ].filter(Boolean).join(' ').toLowerCase();
 
         return terms.every(term => {

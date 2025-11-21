@@ -2,7 +2,7 @@ import {useState} from "react";
 import {Search} from "@mui/icons-material";
 import style from "@/styles/searchbar.module.css";
 
-export default function SearchBar({handleEmailSearch, handleGenericSearch, enableClear, handleClear}) {
+export default function SearchBar({handleEmailSearch, handleGenericSearch, enableClear, handleClear, skipEmailSearch = false}) {
     const [searchValue, setSearchValue] = useState("");
     const emailRegex = /^[A-Za-z0-9.]+@[A-Za-z0-9]+\.[A-Za-z]{2,}$/;
 
@@ -12,7 +12,7 @@ export default function SearchBar({handleEmailSearch, handleGenericSearch, enabl
         const value = typeof searchValue === "object" && searchValue?.target ? searchValue.target.value : searchValue;
         const cleanedValue = String(value).trim();
 
-        if (emailRegex.test(cleanedValue)) {
+        if (!skipEmailSearch && emailRegex.test(cleanedValue)) {
             handleEmailSearch(cleanedValue);
         } else {
             handleGenericSearch(cleanedValue);

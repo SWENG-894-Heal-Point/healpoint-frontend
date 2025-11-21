@@ -49,7 +49,10 @@ export default function DoctorDirectoryPage() {
     function handleGenericSearch(query) {
         const filteredResult = advancedSearch(allDoctors, query);
         if (!filteredResult || filteredResult.length === 0) {
-            setErrorMessage("No doctors found matching the search criteria.");
+            setErrorMessage("No doctor was found that matches the search criteria.");
+            setTimeout(() => {
+                setErrorMessage("");
+            }, 5000);
         } else {
             setErrorMessage("");
             setFilteredDoctors(filteredResult);
