@@ -160,6 +160,7 @@ export default function ScheduleModal({openModal, setOpenModal, doctorId}) {
 
 function generateTimeOptions(start, end) {
     const times = [];
+    times.push({value: "", label: "Off"});
 
     for (let i = start * 60; i <= end * 60; i += 30) {
         const h = String(Math.floor(i / 60)).padStart(2, "0");
