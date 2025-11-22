@@ -7,7 +7,6 @@ import '@/styles/global.css';
 
 import LoginPage from '@/pages/LoginPage';
 import SignupPage from '@/pages/SignupPage';
-import DashboardPage from '@/pages/DashboardPage';
 import AccountPage from '@/pages/AccountPage';
 import UpdateAccountPage from '@/pages/UpdateAccountPage.jsx';
 import DoctorDirectoryPage from "@/pages/DoctorDirectoryPage.jsx";
@@ -17,6 +16,7 @@ import AppointmentListPage from "@/pages/AppointmentListPage.jsx";
 import ScheduleAppointmentPage from "@/pages/ScheduleAppointmentPage.jsx";
 import RescheduleAppointmentPage from "@/pages/RescheduleAppointmentPage.jsx";
 import NotFoundPage from "@/pages/NotFoundPage.jsx";
+import HomePage from "@/pages/HomePage.jsx";
 import {parseJwt} from "@/utils/parseJwt.js";
 
 function App() {
@@ -43,7 +43,6 @@ function App() {
             {
                 (role === "doctor" || role === "patient") &&
                 <>
-                    <Route path="/" element={<DashboardPage/>}/>
                     <Route path="/appointments" element={<AppointmentListPage/>}/>
                     <Route path="/prescription" element={<PrescriptionPage/>}/>
                     <Route path="/doctors" element={<DoctorDirectoryPage/>}/>
@@ -64,6 +63,8 @@ function App() {
                     <Route path="/patients" element={<PatientListPage/>}/>
                 </>
             }
+
+            <Route path="/" element={<HomePage/>}/>
             <Route path="/login" element={<LoginPage/>}/>
             <Route path="/signup" element={<SignupPage/>}/>
             <Route path="*" element={<NotFoundPage/>}/>

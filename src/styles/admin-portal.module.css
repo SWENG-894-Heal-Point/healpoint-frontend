@@ -1,0 +1,76 @@
+.admin_portal {
+    min-width: 800px;
+}
+
+.toolbar {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.toolbar > div:first-child {
+    margin-bottom: 0 !important;
+    width: calc(100% - 350px);
+}
+
+.admin_actions_form {
+    display: flex;
+    justify-content: space-between;
+    width: 300px;
+}
+
+.admin_actions_form button {
+    width: 70px;
+}
+
+.admin_actions_form select {
+    width: 220px;
+    padding: 10px;
+    border: 1px solid var(--grey-border-color);
+    border-radius: 5px;
+    outline: none;
+}
+
+.button_group {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.account_deactivation_inputs {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 20px;
+    margin-bottom: 30px;
+}
+
+.modal_prompt {
+    line-height: 1.5;
+}
+
+.schedule_table {
+    margin-top: 20px;
+    margin-bottom: 30px;
+}
+
+.schedule_row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 10px 0;
+}
+
+.schedule_row * {
+    width: 30%;
+}
+
+.schedule_row select {
+    width: 100%;
+    padding: 5px;
+    border: 1px solid var(--grey-border-color);
+    border-radius: 5px;
+    outline: none;
+}
