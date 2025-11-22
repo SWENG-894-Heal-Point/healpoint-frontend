@@ -4,7 +4,7 @@ import AccountWrapper from "@/components/account/AccountWrapper";
 import style from "@/styles/account.module.css";
 
 import states from "@/data/states.json"
-import Dropdown from "@/components/common/Dropdown.jsx";
+import FormikDropdown from "@/components/common/FormikDropdown.jsx";
 import genderOptions from "@/data/genderOptions.json";
 
 const PersonalInfoSignup = (props) => {
@@ -55,7 +55,7 @@ const PersonalInfoSignup = (props) => {
                                 max={currentDate}
                                 required
                             />
-                            <Dropdown label="Gender" options={genderOptions} required/>
+                            <FormikDropdown label="Gender" options={genderOptions} required/>
                             <Field
                                 name="phone"
                                 placeholder="Phone No (e.g. 2155551234)"
@@ -75,7 +75,7 @@ const PersonalInfoSignup = (props) => {
                                     />
                                     <Field name="city" placeholder="City" type="text" required/>
                                     <div className={style.info_row}>
-                                        <Dropdown className={style.state_field} label="State" required options={states}/>
+                                        <FormikDropdown className={style.state_field} label="State" required options={states}/>
                                         <Field
                                             name="zipCode"
                                             placeholder="ZIP Code"

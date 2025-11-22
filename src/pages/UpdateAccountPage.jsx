@@ -5,7 +5,7 @@ import secureLocalStorage from "react-secure-storage";
 import axios from "axios";
 
 import Layout from "@/components/common/Layout.jsx";
-import Dropdown from "@/components/common/Dropdown.jsx";
+import FormikDropdown from "@/components/common/FormikDropdown.jsx";
 import {fetchProfileData} from "@/utils/fetchProfileData.js";
 import genderOptions from "@/data/genderOptions.json";
 import states from "@/data/states.json";
@@ -75,7 +75,7 @@ export default function UpdateAccountPage() {
                         <h2 className="text-align-center">Update Details</h2>
                         <div className={style.update_profile_container}>
                             <div className={style.left_column}>
-                                <Dropdown label="Gender" options={genderOptions} required/>
+                                <FormikDropdown label="Gender" options={genderOptions} required/>
                                 <Field name="phone" placeholder="Phone No (e.g. 2155551234)" type="tel"
                                        pattern="[0-9]{10}" maxLength="10" required/>
                                 <Field id="email" name="email" placeholder="Email" type="email" required/>
@@ -89,8 +89,8 @@ export default function UpdateAccountPage() {
                                         <Field name="streetAddress" placeholder="Street Address" type="text" required/>
                                         <Field name="city" placeholder="City" type="text" required/>
                                         <div className={style.info_row}>
-                                            <Dropdown className={style.state_field} label="State" options={states}
-                                                      required/>
+                                            <FormikDropdown className={style.state_field} label="State" options={states}
+                                                            required/>
                                             <Field name="zipCode" placeholder="ZIP Code" type="text" required/>
                                         </div>
                                         <Field name="insuranceId" placeholder="Member ID" type="text"/>
