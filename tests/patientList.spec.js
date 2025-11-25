@@ -55,16 +55,3 @@ test("ST-24 Doctor can view a patient profile using search feature", async ({ pa
     await expect(page.getByText("Insurance", { exact: true })).toBeVisible();
     await expect(page.getByText("Address")).toBeVisible();
 });
-
-// TODO: Remove this test
-// test("Patient cannot access the patient list page", async ({ page }) => {
-//     // Log in as a Patient
-//     await login(page, "jane.doe@example.com", "Pass125*");
-//
-//     // Try to go to Patient List Page
-//     await page.goto("http://localhost:4173/patients");
-//     await page.waitForTimeout(1000);
-//
-//     // Verify access denied message is shown
-//     await expect(page.getByText(/Access denied/i)).toBeVisible();
-// });

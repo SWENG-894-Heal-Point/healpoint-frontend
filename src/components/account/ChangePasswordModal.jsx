@@ -1,13 +1,13 @@
 import {useState} from "react";
-import {Modal, Box} from "@mui/material";
+import {Box, Modal} from "@mui/material";
 import {ErrorMessage, Field, Form, Formik} from "formik";
 import secureLocalStorage from "react-secure-storage";
 import axios from "axios";
 
-import style from "@/styles/account.module.css";
 import {handleError} from "@/utils/handleError.js";
+import style from "@/styles/account.module.css";
 
-export default function ChangePasswordModal({openModal, setOpenModal}) {
+export default function ChangePasswordModal({openModal, setOpenModal, isAdminReset = false, targetUserId = null}) {
     const [isShowPassword, setShowPassword] = useState(false);
     const [errorMessage, setErrorMessage] = useState("");
     const authToken = secureLocalStorage.getItem("auth-token");
@@ -18,22 +18,30 @@ export default function ChangePasswordModal({openModal, setOpenModal}) {
     }
 
     function handleSave(values) {
-        axios.post("/update-my-password", values, {
+        const url = isAdminReset ? "/admin/update-user-password" : "/update-my-password";
+        if (isAdminReset && targetUserId) {
+            values.targetUserId = targetUserId;
+        }
+
+        axios.post(url, values, {
             headers: {"Content-Type": "application/json"}
-        })
-            .then((response) => {
-                if (response.status === 200) {
-                    setErrorMessage("");
-                    setOpenModal(false);
-                }
-            })
-            .catch((err) => {
-                handleError(err, setErrorMessage);
-            });
+        }).then((response) => {
+            if (response.status === 200) {
+                setErrorMessage("");
+                setOpenModal(false);
+            }
+        }).catch((err) => {
+            handleError(err, setErrorMessage);
+        });
+    }
+
+    function handleClose() {
+        setErrorMessage("");
+        setOpenModal(false);
     }
 
     return (
-        <Modal open={openModal} onClose={() => setOpenModal(false)}>
+        <Modal open={openModal} onClose={handleClose}>
             <Box
                 sx={{
                     p: 4,
@@ -47,11 +55,11 @@ export default function ChangePasswordModal({openModal, setOpenModal}) {
                 }}
             >
                 <div className={`${style.account_container} ${style.change_password_modal}`}>
-                    <h2 className={style.primary_title}>Change Password</h2>
+                    <div className={style.primary_title}>Change Password</div>
                     <Formik
                         initialValues={{
                             token: authToken,
-                            oldPassword: "",
+                            oldPassword: isAdminReset ? "admin-reset" : "",
                             newPassword: "",
                             confirmNewPassword: "",
                         }}
@@ -75,13 +83,14 @@ export default function ChangePasswordModal({openModal, setOpenModal}) {
                         }}
                     >
                         <Form className={style.form}>
-                            <Field
-                                id="oldPassword"
-                                name="oldPassword"
-                                placeholder="Old Password"
-                                type={isShowPassword ? "text" : "password"}
-                                required
-                            />
+                            {!isAdminReset &&
+                                <Field
+                                    id="oldPassword"
+                                    name="oldPassword"
+                                    placeholder="Old Password"
+                                    type={isShowPassword ? "text" : "password"}
+                                    required
+                                />}
                             <Field
                                 id="newPassword"
                                 name="newPassword"
@@ -108,7 +117,7 @@ export default function ChangePasswordModal({openModal, setOpenModal}) {
                                 {errorMessage && <p>{errorMessage}</p>}
                             </div>
                             <div className={style.button_group}>
-                                <button style={{width: "120px"}} type="button" onClick={() => setOpenModal(false)}>
+                                <button style={{width: "120px"}} type="button" onClick={handleClose}>
                                     Cancel
                                 </button>
                                 <button style={{width: "120px"}} type="submit">

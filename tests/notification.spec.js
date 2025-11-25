@@ -1,7 +1,7 @@
 import {expect, test} from "@playwright/test";
 import {login} from "./helpers/auth.js";
 
-test('ST-33: User can access all notifications', async ({request, baseURL}) => {
+test('ST-34: User can access all notifications', async ({request, baseURL}) => {
     const token = await login(request, baseURL, 'brownr@healpoint.com', 'Pass123*');
     expect(token).toBeTruthy();
 

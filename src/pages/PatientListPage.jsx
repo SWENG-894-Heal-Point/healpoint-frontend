@@ -1,14 +1,15 @@
 import {useEffect, useState} from "react";
-import secureLocalStorage from "react-secure-storage";
+import {useNavigate} from "react-router-dom";
 import axios from "axios";
+import secureLocalStorage from "react-secure-storage";
 
-import {handleError} from "@/utils/handleError.js";
 import Layout from "@/components/common/Layout.jsx";
 import SearchBar from "@/components/common/SearchBar.jsx";
 import PatientProfileView from "@/components/account/PatientProfileView.jsx";
 import UserTable from "@/components/UserTable.jsx";
-import {useNavigate} from "react-router-dom";
+import {fetchUserList} from "@/utils/fetchUserList.js";
 import {advancedSearch} from "@/utils/advancedSearch.js";
+import {handleError} from "@/utils/handleError.js";
 
 
 export default function PatientListPage() {
@@ -27,17 +28,7 @@ export default function PatientListPage() {
     ];
 
     useEffect(() => {
-        axios.get("/get-all-patients", {
-            params: {token: authToken},
-            headers: {"Content-Type": "application/json"}
-        }).then((response) => {
-            if (response.status === 200) {
-                setAllPatients(response.data);
-            }
-        }).catch((err) => {
-            handleError(err, setErrorMessage)
-            setProfileData(null);
-        });
+        fetchUserList("/get-all-patients", authToken, setAllPatients, setErrorMessage, setProfileData);
         // eslint-disable-next-line
     }, []);
 
@@ -61,7 +52,10 @@ export default function PatientListPage() {
         const filteredResult = advancedSearch(allPatients, query);
 
         if (!filteredResult || filteredResult.length === 0) {
-            setErrorMessage("No patients found matching the search criteria.");
+            setErrorMessage("No patient was found that matches the search criteria.");
+            setTimeout(() => {
+                setErrorMessage("");
+            }, 5000);
         } else {
             setErrorMessage("");
             setFilteredPatients(filteredResult);
