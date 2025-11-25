@@ -1,10 +1,28 @@
-.dashboard_top_section {
+.dashboard {
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.empty_notification_table {
+    background-color: var(--white-color);
+    margin-top: 30px;
+    padding: 10px;
+    border: 1px solid var(--grey-border-color);
+}
+
+.dashboard_widget_section {
     min-width: 300px;
     max-width: 800px;
+    margin-top: 20px;
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
     gap: 20px;
-    justify-items: center;
+    justify-items: start;
+}
+
+.dashboard_widget_section .widget {
+    min-width: calc(50% - 10px);
 }
 
 .contact_info {

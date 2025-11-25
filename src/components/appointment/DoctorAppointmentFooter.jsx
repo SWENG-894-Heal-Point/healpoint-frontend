@@ -1,11 +1,12 @@
-import {transformText} from "@/utils/transformText.js";
-import style from '@/styles/appointment.module.css';
-import {formatDate} from "@/utils/formatDate.js";
 import {useState} from "react";
 import {Box, Modal} from "@mui/material";
 import axios from "axios";
-import {handleError} from "@/utils/handleError.js";
 import secureLocalStorage from "react-secure-storage";
+
+import {transformText} from "@/utils/transformText.js";
+import {formatDate} from "@/utils/formatDate.js";
+import {handleError} from "@/utils/handleError.js";
+import style from '@/styles/appointment.module.css';
 
 
 export default function DoctorAppointmentFooter({appointment, currentDate, isScheduled}) {
@@ -26,7 +27,7 @@ export default function DoctorAppointmentFooter({appointment, currentDate, isSch
 
     function handleChange(e) {
         setAppointmentStatus(e.target.value);
-    };
+    }
 
     function handleSubmit(e) {
         e.preventDefault();
@@ -45,12 +46,17 @@ export default function DoctorAppointmentFooter({appointment, currentDate, isSch
         })
     }
 
+    function handleClose() {
+        setErrorMessage("");
+        setOpenModal(false);
+    }
+
     return (
         <div>
             {enableUpdate ? (
                 <div className={style.appointment_actions}>
                     <div onClick={() => setOpenModal(true)}>Update Status</div>
-                    <Modal open={openModal} onClose={() => setOpenModal(false)}>
+                    <Modal open={openModal} onClose={handleClose}>
                         <Box
                             sx={{
                                 p: 4,
@@ -88,8 +94,7 @@ export default function DoctorAppointmentFooter({appointment, currentDate, isSch
                                         </div>
                                     }
                                     <div className={style.button_group}>
-                                        <button className="default_btn" type="button"
-                                                onClick={() => setOpenModal(false)}>
+                                        <button className="default_btn" type="button" onClick={handleClose}>
                                             Cancel
                                         </button>
                                         <button className="default_btn" type="submit">

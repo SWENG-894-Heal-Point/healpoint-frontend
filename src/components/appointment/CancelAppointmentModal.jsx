@@ -33,10 +33,15 @@ export default function CancelAppointmentModal({appointment}) {
         })
     }
 
+    function handleClose() {
+        setErrorMessage("");
+        setOpenModal(false);
+    }
+
     return (
         <>
             <div onClick={() => setOpenModal(true)}>Cancel</div>
-            <Modal open={openModal} onClose={() => setOpenModal(false)}>
+            <Modal open={openModal} onClose={handleClose}>
                 <Box
                     sx={{
                         p: 4,
@@ -59,7 +64,7 @@ export default function CancelAppointmentModal({appointment}) {
                             {errorMessage && <p>{errorMessage}</p>}
                         </div>
                         <div className={style.button_group}>
-                            <button className="default_btn" type="button" onClick={() => setOpenModal(false)}>
+                            <button className="default_btn" type="button" onClick={handleClose}>
                                 No
                             </button>
                             <button className="default_btn" type="button" onClick={handleConfirmCancel}>

@@ -20,7 +20,8 @@ const LoginPage = () => {
                 navigate("/");
             }
         }
-    }, [navigate]);
+        // eslint-disable-next-line
+    }, []);
 
     function handleSubmission(values) {
         setErrorMessage("")
