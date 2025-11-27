@@ -5,6 +5,7 @@ import secureLocalStorage from "react-secure-storage";
 
 import '@/styles/global.css';
 
+import LoadingOverlay from "@/components/loading/LoadingOverlay.jsx";
 import LoginPage from '@/pages/LoginPage';
 import SignupPage from '@/pages/SignupPage';
 import AccountPage from '@/pages/AccountPage';
@@ -39,36 +40,39 @@ function App() {
     }, [navigate, pathname]);
 
     return (
-        <Routes>
-            {
-                (role === "doctor" || role === "patient") &&
-                <>
-                    <Route path="/appointments" element={<AppointmentListPage/>}/>
-                    <Route path="/prescription" element={<PrescriptionPage/>}/>
-                    <Route path="/doctors" element={<DoctorDirectoryPage/>}/>
-                    <Route path="/account" element={<AccountPage/>}/>
-                    <Route path="/update-account" element={<UpdateAccountPage/>}/>
-                </>
-            }
-            {
-                (role === "patient") &&
-                <>
-                    <Route path="/schedule-appointment" element={<ScheduleAppointmentPage/>}/>
-                    <Route path="/reschedule-appointment" element={<RescheduleAppointmentPage/>}/>
-                </>
-            }
-            {
-                (role === "doctor") &&
-                <>
-                    <Route path="/patients" element={<PatientListPage/>}/>
-                </>
-            }
+        <>
+            <LoadingOverlay />
+            <Routes>
+                {
+                    (role === "doctor" || role === "patient") &&
+                    <>
+                        <Route path="/appointments" element={<AppointmentListPage/>}/>
+                        <Route path="/prescription" element={<PrescriptionPage/>}/>
+                        <Route path="/doctors" element={<DoctorDirectoryPage/>}/>
+                        <Route path="/account" element={<AccountPage/>}/>
+                        <Route path="/update-account" element={<UpdateAccountPage/>}/>
+                    </>
+                }
+                {
+                    (role === "patient") &&
+                    <>
+                        <Route path="/schedule-appointment" element={<ScheduleAppointmentPage/>}/>
+                        <Route path="/reschedule-appointment" element={<RescheduleAppointmentPage/>}/>
+                    </>
+                }
+                {
+                    (role === "doctor") &&
+                    <>
+                        <Route path="/patients" element={<PatientListPage/>}/>
+                    </>
+                }
 
-            <Route path="/" element={<HomePage/>}/>
-            <Route path="/login" element={<LoginPage/>}/>
-            <Route path="/signup" element={<SignupPage/>}/>
-            <Route path="*" element={<NotFoundPage/>}/>
-        </Routes>
+                <Route path="/" element={<HomePage/>}/>
+                <Route path="/login" element={<LoginPage/>}/>
+                <Route path="/signup" element={<SignupPage/>}/>
+                <Route path="*" element={<NotFoundPage/>}/>
+            </Routes>
+        </>
     );
 }
 
