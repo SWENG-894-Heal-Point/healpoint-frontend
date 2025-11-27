@@ -6,9 +6,10 @@ import style from "@/styles/account.module.css";
 import states from "@/data/states.json"
 import FormikDropdown from "@/components/common/FormikDropdown.jsx";
 import genderOptions from "@/data/genderOptions.json";
+import {addDays} from "date-fns";
 
 const PersonalInfoSignup = (props) => {
-    const currentDate = new Date().toISOString().slice(0, 10);
+    const currentDate = addDays(new Date(), -2).toISOString().slice(0, 10);
 
     return (<Formik
             initialValues={{
