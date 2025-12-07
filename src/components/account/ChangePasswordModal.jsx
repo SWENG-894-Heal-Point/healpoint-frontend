@@ -13,7 +13,7 @@ export default function ChangePasswordModal({openModal, setOpenModal, isAdminRes
     const authToken = secureLocalStorage.getItem("auth-token");
 
     function checkPassword(str) {
-        const re = /^(?=.*\d)(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
+        const re = /^(?=.*\d)(?=.*[!@#$%^*&?])(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
         return re.test(str);
     }
 
